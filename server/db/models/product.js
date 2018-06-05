@@ -1,6 +1,8 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
 
+
+//This is our product route
 const Product = db.define('product', {
     name: {
         type: Sequelize.STRING
@@ -17,3 +19,22 @@ const Product = db.define('product', {
         max: 5
     }
 })
+
+Product.findByName = function (name) {
+    return Product.findAll({
+        where: {
+            name
+        }
+    })
+}
+
+//Started Category instance method
+// Product.findByCategory = function (category) {
+//     return Product.findAll({
+//         where: {
+//             category
+//         }
+//     })
+// }
+
+module.exports = Product
