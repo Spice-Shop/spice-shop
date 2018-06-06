@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 export default class NewProduct extends Component {
   constructor() {
@@ -15,7 +15,9 @@ export default class NewProduct extends Component {
   render() {
     return (
       <div>
-        <form>{//Oh no! Dan interrupted us to make a lecture... oh well.}</form>
+        <form>
+          {/*Oh no! Dan interrupted us to make a lecture... oh well.*/}
+        </form>
       </div>
     )
   }
