@@ -9,7 +9,34 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 /**
  * INITIAL STATE
  */
-const initialProducts = []
+const initialProducts = [{
+  id: 1,
+  name: 'Oregano',
+  imgUrl: 'oregano.jpg',
+  description: 'great for pizza',
+  rating: 5
+},
+{
+  id: 2,
+  name: 'Tumeric',
+  imgUrl: 'oregano.jpg',
+  description: 'great for superpowers',
+  rating: 5
+},
+{
+  id: 3,
+  name: 'Pepper',
+  imgUrl: 'oregano.jpg',
+  description: 'can\'t live without it',
+  rating: 5
+},
+{
+  id: 4,
+  name: 'Curry',
+  imgUrl: 'oregano.jpg',
+  description: 'I can\t live without it',
+  rating: 5
+}]
 
 /**
  * ACTION CREATORS
