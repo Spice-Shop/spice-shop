@@ -26,7 +26,7 @@ const Products = (props) => {
         <div className="parent-product-container">
           {products.map((product) => {
             let productImage = {
-              backgroundImage: `url('images/${product.imgUrl}')`
+              backgroundImage: `url('${product.imgUrl}')`
             }
             return (
               <div key={product.id} className="product-container">
@@ -49,17 +49,5 @@ const mapProducts = (state) => {
     state
   }
 }
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     handleSubmit (evt) {
-//       evt.preventDefault()
-//       const formName = evt.target.name
-//       const email = evt.target.email.value
-//       const password = evt.target.password.value
-//       dispatch(auth(email, password, formName))
-//     }
-//   }
-// }
 
 export const AllProducts = connect(mapProducts)(Products)

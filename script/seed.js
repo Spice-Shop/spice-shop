@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -24,9 +24,39 @@ async function seed () {
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
+  const products = await Promise.all([
+    Product.create({
+      name: 'Oregano',
+      description: 'great for pizza',
+      imgUrl: 'https://cdn.shopify.com/s/files/1/0156/0137/products/refill_0020_oregano.jpg?v=1522849769',
+      rating: 3,
+      originCategory: 'Italy'
+    }),
+    Product.create({
+      name: 'Turmeric',
+      description: 'great for pizza',
+      imgUrl: 'https://www.hiltonherbs.com/image/cache/data/STRAIGHT%20HERBS/Curcuma-600x600.jpg',
+      rating: 4,
+      originCategory: 'India'
+    }),
+    Product.create({
+      name: 'Pepper',
+      description: 'great for pizza',
+      imgUrl: 'https://static.thespicehouse.com/images/image/40/large_pepper.JPG',
+      rating: 5,
+      originCategory: 'Vietnam'
+    }),
+    Product.create({
+      name: 'Curry', description: 'great for pizza',
+      imgUrl: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/spice_rack_herbs_slideshow/getty_rf_photo_of_variety_of_spices_in_bowls.jpg',
+      rating: 5,
+      originCategory: 'Vietnam'
+    })
+  ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
