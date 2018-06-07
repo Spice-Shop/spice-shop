@@ -4,9 +4,9 @@ const Sequelize = require('sequelize')
 //This is our product route
 const Product = db.define('product', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING //CG: does this need to be unique?!?
   },
-  imgUrl: {
+  imgUrl: { //CG: validate as a url. defaultValue
     type: Sequelize.STRING
   },
   description: {
@@ -19,9 +19,12 @@ const Product = db.define('product', {
   },
   originCategory: {
     type: Sequelize.STRING
-  },
+  }, // an infinite amount...this is great.
+    //if therea are exactly 3-10 categories we can use an ENUM
+    //if we want control over our infinite amount of categories we can use another model 
   price: {
     type: Sequelize.FLOAT //might want to change later
+    //Sequelize.INTEGER
   }
 })
 

@@ -18,9 +18,12 @@ const OrderLineItem = require('./order-line-item')
  */
 
 
-Order.belongsTo(User)
-OrderLineItem.belongsTo(Order)
-OrderLineItem.belongsTo(Product)
+Order.belongsTo(User) 
+
+Order.belongsToMany(Product, {through: OrderLineItem});
+Product.belongsToMany(Order, {through: OrderLineItem});
+// OrderLineItem.belongsTo(Order)
+// OrderLineItem.belongsTo(Product)
 Product.hasMany(OrderLineItem)
 
 module.exports = {

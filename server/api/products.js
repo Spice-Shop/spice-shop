@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
 
+// /api/products/4 
+// /api/products/chicken
+
 //route to find single product by ID
 router.param('productId', (req, res, next, id) => {
   Product.findById(id)
@@ -8,21 +11,31 @@ router.param('productId', (req, res, next, id) => {
     if (!product) {
       const err = Error('Product not found');
       err.status = 404;
-      throw err
+      throw err //CG: I think this will break your life. next(err)
     }
     req.product = product;
     next();
-    return null;
+    return null; //CG: idk
   })
   .catch(next);
 });
 
 //All Products Route
 router.get('/', (req, res, next) => {
-  Product.findAll({})
+  // const whereObj = {};
+  // if(req.query.category){
+  //   whereObj.category = req.query.category; 
+  // }
+  Product.findAll({
+    // where: whereObj
+  })
     .then(products => res.json(products))
     .catch(next)
 })
+
+// /api/products/idNumber name.
+// /api/products?name=asdasdsd
+// /api/products?category=?daskdlndo
 
 //Product by Name route
 router.get('/:name', (req, res, next) => {

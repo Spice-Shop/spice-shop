@@ -3,7 +3,7 @@ const { OrderLineItem } = require('../db/models')
 
 //Order Line Items Route
 router.get('/:id', (req, res, next) => {
-
+    //we should be looking for orders and including a join table.
     OrderLineItem.findAll({
         where: {
             orderId: req.params.id

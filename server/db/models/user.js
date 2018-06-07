@@ -2,11 +2,12 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+//CG: Let's make sure that we add an isAdmin attribute. defaultValue=false.
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false //CG: notEmpty is something we care about. 
   },
   password: {
     type: Sequelize.STRING,
