@@ -19,6 +19,9 @@ const Product = db.define('product', {
   },
   originCategory: {
     type: Sequelize.STRING
+  },
+  price: {
+    type: Sequelize.FLOAT //might want to change later
   }
 })
 

@@ -1,56 +1,65 @@
-'use strict'
+const db = require('../server/db');
+const Product = require('../server/db/models/product');
+const User = require('../server/db/models/user');
 
-const db = require('../server/db')
-const {User} = require('../server/db/models')
+//list of products to seed
+const products = [{
+  "name": "Oregano",
+  "imgUrl": "oregano.jpg",
+  "description": "great for pizza",
+  "rating": "5",
+}, {
+  "name": "Tumeric",
+  "imgUrl": "oregano.jpg",
+  "description": "great for superpowers",
+  "rating": "5",
+}, {
+  "name": "Pepper",
+  "imgUrl": "oregano.jpg",
+  "description": "can\'t live without it",
+  "rating": "5",
+}, {
+  "name": "Curry",
+  "imgUrl": "oregano.jpg",
+  "description": "I can\t live without it",
+  "rating": "5",
+}];
 
-/**
- * Welcome to the seed file! This seed file uses a newer language feature called...
- *
- *                  -=-= ASYNC...AWAIT -=-=
- *
- * Async-await is a joy to use! Read more about it in the MDN docs:
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
- *
- * Now that you've got the main idea, check it out in practice below!
- */
+const users = [{
+  "email": 'cody@email.com',
+  "password": '123'
+}, {
+  "email": 'murphy@email.com',
+  "password": '123'
+}]
 
-async function seed () {
-  await db.sync({force: true})
-  console.log('db synced!')
-  // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
-  // executed until that promise resolves!
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-}
+//create each seed file
+const seed = () =>
+  Promise.all(products.map(product =>
+    Product.create(product))
+  )
+    .then(() =>
+      Promise.all(users.map(user =>
+        User.create(user))
+      )
+    )
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
-if (module === require.main) {
-  seed()
-  .catch(err => {
-    console.error(err)
-    process.exitCode = 1
-  })
-  .finally(() => { // `finally` is like then + catch. It runs no matter what.
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
-  /*
-   * note: everything outside of the async function is totally synchronous
-   * The console.log below will occur before any of the logs that occur inside
-   * of the async function
-   */
-  console.log('seeding...')
-}
+//db force true, run seed function, close db
+const main = () => {
+  console.log('Syncing db...');
+  db.sync({ force: true })
+    .then(() => {
+      console.log('Seeding database...');
+      return seed();
+    })
+    .then(() => {
+      db.close();
+    })
+    .catch(err => {
+      console.log('Error while seeding');
+      console.log(err.stack);
+    })
+};
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+//invoke main to start seeding process
+main();
