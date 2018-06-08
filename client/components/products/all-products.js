@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-// import SingleProduct from './single-product'
 
 //--------------Component-------------------
 class Products extends Component {
@@ -15,7 +13,6 @@ class Products extends Component {
 
   handleFilter(e) {
     let value = parseInt(e.target.name, 10)
-    console.log('here', e.target.name)
     this.setState({ filtered: value })
   }
 
@@ -26,7 +23,6 @@ class Products extends Component {
           return product.rating === this.state.filtered
         })
       : products
-    console.log(this.state)
     return (
       <div>
         <h3>Products</h3>
