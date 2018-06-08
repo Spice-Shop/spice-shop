@@ -9,7 +9,17 @@ const GET_CART = 'GET_CART'
 /**
  * INITIAL STATE
  */
-const initialCart = []
+const initialCart = [{
+  id: 1,
+  quantity: 1,
+  productId: 1,
+  orderId: 1
+},{
+  id: 2,
+  quantity: 2,
+  productId: 2,
+  orderId: 1
+}]
 
 /**
  * ACTION CREATORS
