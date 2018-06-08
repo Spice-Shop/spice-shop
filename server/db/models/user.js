@@ -2,12 +2,16 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-//CG: Let's make sure that we add an isAdmin attribute. defaultValue=false.
+
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false //CG: notEmpty is something we care about. 
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isEmail: true  // We should validate in the Front End as well.
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -16,6 +20,10 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('password')
     }
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   salt: {
     type: Sequelize.STRING,
