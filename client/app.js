@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import {Navbar} from './components'
+import { Navbar } from './components'
 import Routes from './routes'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchProducts } from './store/products'
-
 
 class App extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   componentDidMount() {
     this.props.fetchInitialData()
   }
@@ -22,20 +22,22 @@ class App extends Component {
         <Routes />
       </div>
     )
-  } 
+  }
 }
 
 const mapStateToProps = () => {
   return {}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchInitialData: () => dispatch(fetchProducts())
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+)
