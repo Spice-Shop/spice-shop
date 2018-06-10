@@ -6,21 +6,25 @@ const products = [{
     "name": "Oregano",
     "imgUrl": "oregano.jpg",
     "description": "great for pizza",
+    "price": "1.00",
     "rating": "5",
   }, {
     "name": "Tumeric",
     "imgUrl": "oregano.jpg",
     "description": "great for superpowers",
+    "price": "3.00",
     "rating": "5",
   }, {
     "name": "Pepper",
     "imgUrl": "oregano.jpg",
     "description": "can\'t live without it",
+    "price": "1.00",
     "rating": "5",
   }, {
     "name": "Curry",
     "imgUrl": "oregano.jpg",
     "description": "I can\t live without it",
+    "price": "4.00",
     "rating": "5",
   }];
 
