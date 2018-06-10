@@ -24,7 +24,7 @@ class Products extends Component {
         })
       : products
     return (
-      <div>
+      <div className="main-product-container">
         <h3>Products</h3>
         <h2>
           <button name="1" onClick={this.handleFilter}>
@@ -57,6 +57,7 @@ class Products extends Component {
                     {product.description}
                   </div>
                   <div className="product-rating">{product.rating}</div>
+                  <div className="product-price">{product.price}</div>
                 </div>
               )
             })

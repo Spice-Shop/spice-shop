@@ -7,10 +7,10 @@ const pkg = require('../../package.json')
 //Path details for each navbar link
 const pathMap = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     showWhenLoggedIn: true,
-    showWhenLoggedOut: false
+    showWhenLoggedOut: true
   },
   {
     path: '/products',
@@ -31,6 +31,12 @@ const pathMap = [
     showWhenLoggedOut: true
   },
   {
+    path: '/user',
+    name: 'Order History',
+    showWhenLoggedIn: true,
+    showWhenLoggedOut: false
+  },
+  {
     path: '/cart',
     name: 'Cart',
     showWhenLoggedIn: true,
@@ -49,7 +55,10 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
 
     <div className="nav-bar-container">
       <Link to="/">
-        <h1>{pkg.title}</h1>
+        <div className="nav-bar-title-container">
+          <div className="nav-bar-organic-image" />
+          <h1 className="nav-bar-title">{pkg.title}</h1>
+        </div>
       </Link>
       <nav>
         {isLoggedIn ? (
@@ -63,7 +72,7 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
               )
             })}
 
-            <a href="#" onClick={handleClick}>
+            <a href="#" className="nav-item" onClick={handleClick}>
               Logout
             </a>
           </div>
@@ -81,7 +90,6 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
             </div>
           )}
       </nav>
-      <hr />
     </div>
   )
 }

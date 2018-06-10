@@ -28,7 +28,7 @@ const CartItems = (props) => {
   }
   else {
     return (
-      <div>
+      <div className="cart-container">
         <h3>Cart</h3>
         <div className="parent-cart-container">
           {/* Map over cart line items and print out the information */}
@@ -49,14 +49,18 @@ const CartItems = (props) => {
                   <div className="my-product-name">{myProduct.name}</div>
                   <div className="my-product-description">{myProduct.description}</div>
                   <div className="my-product-rating">{myProduct.rating}</div>
+                  <div className="product-price">{myProduct.price}</div>
                 </div>
                 <div className="my-product-quantity-container">
                     <input className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
                     <button className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                    <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                 </div>
               </div>
             )
           })}
+          <div className="cart-total">{/* PUT SUBTOTAL ON STATE, THIS SHOULD BE RENDERED BY TOTAL ON STATE */}</div>
+          <button className="cart-submit" type="submit">Checkout</button>
         </div>
       </div>
     )
