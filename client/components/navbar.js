@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout, updateLocation } from '../store'
+const pkg = require('../../package.json')
 
 //Path details for each navbar link
 const pathMap = [
@@ -48,7 +49,7 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
 
     <div className="nav-bar-container">
       <Link to="/">
-        <h1>Spice Shop</h1>
+        <h1>{pkg.title}</h1>
       </Link>
       <nav>
         {isLoggedIn ? (
