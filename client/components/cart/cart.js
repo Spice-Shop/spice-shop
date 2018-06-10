@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 /**
  * COMPONENT
  */
@@ -34,19 +34,26 @@ const CartItems = (props) => {
           {/* Map over cart line items and print out the information */}
           {cart.map((cartItem) => {
             //Filter products by cart line item id
-            let myProduct = products.filter(product => product.id === cartItem.productId)
+            let myProduct = products.find(product => product.id === cartItem.productId)
             //Create product image style
             let myProductImage = {
-              backgroundImage: `url('images/${myProduct.length && myProduct[0].imgUrl}')`
+              backgroundImage: `url(${myProduct && myProduct.imgUrl})`
             }
             return (
-              myProduct.length &&
-              <div key={cartItem.id} className="cartItem-container">
-                <div className="cart-item-quantity">{cartItem.quantity}</div>
-                <div className="my-product-name">{myProduct[0].name}</div>
-                <div className="my-product-imgUrl" style={myProductImage} />
-                <div className="my-product-description">{myProduct[0].description}</div>
-                <div className="my-product-rating">{myProduct[0].rating}</div>
+              myProduct &&
+              <div key={cartItem.id} className="cart-item-container">
+                <div className="my-product-image-container">
+                  <div className="my-product-imgUrl" style={myProductImage} />
+                </div>
+                <div className="my-product-text-container">
+                  <div className="my-product-name">{myProduct.name}</div>
+                  <div className="my-product-description">{myProduct.description}</div>
+                  <div className="my-product-rating">{myProduct.rating}</div>
+                </div>
+                <div className="my-product-quantity-container">
+                    <input className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    <button className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                </div>
               </div>
             )
           })}
