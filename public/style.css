@@ -1,6 +1,7 @@
 /* ------ Default Styles ------ */
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -19,6 +20,17 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/*-------- Main Sections ---------- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container {
+  flex: auto;
 }
 
 /*-------- Products Grid ---------- */

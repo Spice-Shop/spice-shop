@@ -7,15 +7,9 @@ import { logout, updateLocation } from '../store'
 const pathMap = [
   {
     path: '/home',
-    name: 'Home',
+    name: 'My Settings',
     showWhenLoggedIn: true,
     showWhenLoggedOut: false
-  },
-  {
-    path: '/products',
-    name: 'Products',
-    showWhenLoggedIn: true,
-    showWhenLoggedOut: true
   },
   {
     path: '/login',
@@ -28,32 +22,22 @@ const pathMap = [
     name: 'Signup',
     showWhenLoggedIn: false,
     showWhenLoggedOut: true
-  },
-  {
-    path: '/cart',
-    name: 'Cart',
-    showWhenLoggedIn: true,
-    showWhenLoggedOut: true
   }
 ]
 
-const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
+const Footer = ({ location, handleClick, checkLocation, isLoggedIn }) => {
 
   //Set active class on link click
   const setActive = (path) => {
-    return location === path ? 'nav-item active' : 'nav-item'
+    return location === path ? 'footer-item active' : 'footer-item'
   }
 
   return (
 
-    <div className="nav-bar-container">
-      <Link to="/">
-        <h1>Spice Shop</h1>
-      </Link>
-      <nav>
+    <div className="footer-bar-container">
         {isLoggedIn ? (
-          <div className="nav-bar">
-
+          <div className="footer-bar">
+            
             {/* The navbar will show these links after you log in */}
             {/* Map all links based on path map object and login preference */}
             {pathMap.filter(link => link.showWhenLoggedIn).map(link => {
@@ -67,21 +51,20 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
             </a>
           </div>
         ) : (
-            <div className="nav-bar">
+            <div className="footer-bar">
 
               {/* The navbar will show these links before you log in */}
               {/* Map all links based on path map object and login preference */}
               {pathMap.filter(link => link.showWhenLoggedOut).map(link => {
-                return (
-                  <Link key={link.name} onClick={() => checkLocation(link.path)} className={setActive(link.path)} to={link.path}>{link.name}</Link>
-                )
-              })}
+              return (
+                <Link key={link.name} onClick={() => checkLocation(link.path)} className={setActive(link.path)} to={link.path}>{link.name}</Link>
+              )
+            })}
 
             </div>
           )}
-      </nav>
-      <hr />
     </div>
+
   )
 }
 
@@ -107,4 +90,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Footer)
