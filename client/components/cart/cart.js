@@ -37,7 +37,7 @@ const CartItems = (props) => {
             let myProduct = products.filter(product => product.id === cartItem.productId)
             //Create product image style
             let myProductImage = {
-              backgroundImage: `url('${myProduct.length && myProduct[0].imgUrl}')`
+              backgroundImage: `url('images/${myProduct.length && myProduct[0].imgUrl}')`
             }
             return (
               myProduct.length &&

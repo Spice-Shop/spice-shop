@@ -47,7 +47,7 @@ class Products extends Component {
           {filteredProducts.length ? (
             filteredProducts.map(product => {
               let productImage = {
-                backgroundImage: `url('${product.imgUrl}')`
+                backgroundImage: `url('/images/${product.imgUrl}')`
               }
               return (
                 <div key={product.id} className="product-container">
