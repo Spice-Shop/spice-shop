@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link, NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 /**
@@ -28,6 +29,7 @@ class SingleProduct extends Component {
             backgroundImage: `url('${product.imgUrl}')`
           }
           return (
+            <NavLink to={`/products/${product.id}`}>
             <div key={product.id} className="product-container">
               <div className="product-name">{product.name}</div>
               <div className="product-imgUrl" style={productImage} />
@@ -38,6 +40,7 @@ class SingleProduct extends Component {
               <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
               {/* {<button onSubmit={() => updateCart(product)} type="submit" className="product-add-to-cart">Add to Cart</button>} */}
             </div> 
+            </NavLink>
           )
     }
 }
