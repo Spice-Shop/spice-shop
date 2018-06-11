@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
 import SingleProduct from './single-product' 
 
@@ -18,7 +19,7 @@ class Products extends Component {
   }
 
   render() {
-    console.log(this.props.state);
+    console.log("hi", this.props.state);
     const {updateCart} = this.props.state
     const products = this.props.state.products || []
 
@@ -75,4 +76,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const AllProducts = connect(mapProducts, mapDispatch)(Products)
+export const AllProducts = withRouter(connect(mapProducts, mapDispatch)(Products))
