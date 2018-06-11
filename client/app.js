@@ -14,6 +14,7 @@ class App extends Component {
     this.props.fetchInitialData()
   }
 
+  //CG: standardize naming convention so that classNames at top level are named based off name of component and child elements have classNames that extend off of it
   render() {
     return (
       <div className="app-container">

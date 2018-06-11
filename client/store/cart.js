@@ -10,6 +10,8 @@ const ADD_TO_CART = 'ADD_TO_CART'
 /**
  * INITIAL STATE
  */
+
+ //CG: MAKE SURE TO REMOVE THIS
 const initialCart = [{
   id: 1,
   quantity: 1,

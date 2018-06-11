@@ -16,6 +16,7 @@ const CartItems = (props) => {
   //   products.filter
   // }
 
+  //CG: Things that should be in a conditional should be conditional :O
   if (cart.length === 0) {
     return (
       <div>
@@ -39,6 +40,8 @@ const CartItems = (props) => {
             let myProductImage = {
               backgroundImage: `url(${myProduct && myProduct.imgUrl})`
             }
+
+            //Maybe think about product thumbnail component :thinking-face:
             return (
               myProduct &&
               <div key={cartItem.id} className="cart-item-container">

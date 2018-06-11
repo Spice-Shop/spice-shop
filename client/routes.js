@@ -15,13 +15,14 @@ class Routes extends Component {
 
   render () {
     const {isLoggedIn} = this.props
-
+    //this.props.match.params.id
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/products" component={AllProducts} />
+        <Route path="/product" component={AllProducts} />
+        {/* <Route path="/product/:id" component={SingleProduct} /> */}
         <Route path="/cart" component={Cart} />
         <Route exact path="/" component={Home} />
         {
