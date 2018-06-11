@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_CART = 'GET_CART'
+const ADD_TO_CART = 'ADD_TO_CART'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
@@ -14,7 +15,7 @@ const initialCart = [{
   quantity: 1,
   productId: 1,
   orderId: 1
-},{
+}, {
   id: 2,
   quantity: 2,
   productId: 2,
@@ -25,6 +26,8 @@ const initialCart = [{
  * ACTION CREATORS
  */
 const getCart = cartItems => ({type: GET_CART, cartItems})
+
+const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
 // const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -50,6 +53,8 @@ export default function (state = initialCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cartItems
+    case ADD_TO_CART:
+      return action.cartItem
     // case REMOVE_USER:
     //   return defaultUser
     default:

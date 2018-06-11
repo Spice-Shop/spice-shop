@@ -11,7 +11,7 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
-    "postdeploy": "psql $DATABASE_URL -f spiceshop.sql",
+    "postdeploy": "node script/seed.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "postinstall": "touch secrets.js node script/seed.js",
     "seed": "node script/seed.js",
