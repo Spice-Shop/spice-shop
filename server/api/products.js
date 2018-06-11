@@ -24,8 +24,10 @@ router.get('/', (req, res, next) => {
 })
 
 //Creat New Product Route
+
+//CG: need security plz....
 router.post('/', (req, res, next) => {
-  Product.create(req.body)
+  Product.create(req.body) //CG: this is dangerous
     .then(product => res.status(201).json(product))
     .catch(next)
 })
@@ -44,7 +46,7 @@ router.put('/:productId', (req, res, next) => {
   let product = req.params.productId;
 
   Product.findById(product)
-    .then(foundProduct => foundProduct.update(req.body))
+    .then(foundProduct => foundProduct.update(req.body)) //CG: this is dangerous
     .then(updatedProduct => res.json(updatedProduct))
     .catch(next)
 })
