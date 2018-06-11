@@ -19,7 +19,7 @@ class Products extends Component {
   }
 
   render() {
-    console.log("hi", this.props.state);
+    
     const {updateCart} = this.props.state
     const products = this.props.state.products || []
 

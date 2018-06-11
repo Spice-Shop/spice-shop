@@ -1,40 +1,32 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {fetchProducts} from '../../store/products'
 
-/**
- * COMPONENT
- */
 class SingleProductDetail extends Component {
-    // MAY NEED TO USE THIS
-    // componentWillReceiveProps (newProps, oldProps) {
-    //     if(newProps.product !== oldProps.product) {
-    //         this.setState({
-    //             product: newProps.product
-    //         })
-    //     }
-    // }
+    constructor(props) {
+        super(props)
+    }
 
+    componentDidMount() {
+        this.props.fetchInitialData()
+    }
     render() {
-        console.log(this.props.location.pathname)
-        const thisOne = this.props.location.pathname.slice(10)
-        console.log(thisOne)
-        const products = this.props.state.products
-        const product = this.props.state.products.filter((item) => item.id )   
-        // const product = this.state.product
-        // let productImage = {
-        //     backgroundImage: `url('${product.imgUrl}')`
-        //   }
-          return (
-            <div key={product.id} className="product-container">
-              <div className="product-name">{product.name}</div>
-              <div className="product-imgUrl" style={productImage} />
+        const productId = Number(this.props.match.params.id)
+        console.log(this.props)
+        const products = this.props.products
+        const selectedProduct = products.filter((item) => item.id === productId)   
+        console.log(selectedProduct)
+            return "hi" || (
+            <div key={selectedProduct.id} className="product-container">
+              <div className="product-name">{selectedProduct.name}</div>
+              <div className="product-imgUrl" src={selectedProduct.imgUrl} />
               <div className="product-description">
-                {product.description}
+                {selectedProduct.description}
               </div>
-              <div className="product-rating">{`${'⭐'.repeat(product.rating)}`}</div>
-              <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
-              {/* {<button onSubmit={() => updateCart(product)} type="submit" className="product-add-to-cart">Add to Cart</button>} */}
+              <div className="product-rating">{`${'⭐'.repeat(selectedProduct.rating)}`}</div>
+              <div className="product-price">{`$ ${selectedProduct.price.toFixed(2)}`}</div>
+              {/* {<button onSubmit={() => updateCart(selectedProduct)} type="submit" className="product-add-to-cart">Add to Cart</button>} */}
             </div> 
           )
     }
@@ -42,9 +34,14 @@ class SingleProductDetail extends Component {
 
 const mapProducts = state => {
     return {
-      state
+      products: state.products
     }
   }
-    
 
-export default withRouter(connect(mapProducts)(SingleProductDetail))
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchInitialData: () => dispatch(fetchProducts())
+    }
+}
+    
+export default withRouter(connect(mapProducts, mapDispatchToProps)(SingleProductDetail))
