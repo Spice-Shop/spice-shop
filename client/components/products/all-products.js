@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
+import SingleProduct from './single-product' 
 
 //--------------Component-------------------
 class Products extends Component {
@@ -17,7 +19,7 @@ class Products extends Component {
   }
 
   render() {
-    console.log(this.props.state);
+    
     const {updateCart} = this.props.state
     const products = this.props.state.products || []
 
@@ -49,23 +51,7 @@ class Products extends Component {
         </h2>
         <div className="parent-product-container">
           {filteredProducts.length ? (
-            filteredProducts.map(product => {
-              let productImage = {
-                backgroundImage: `url('${product.imgUrl}')`
-              }
-              return (
-                <div key={product.id} className="product-container">
-                  <div className="product-name">{product.name}</div>
-                  <div className="product-imgUrl" style={productImage} />
-                  <div className="product-description">
-                    {product.description}
-                  </div>
-                  <div className="product-rating">{product.rating}</div>
-                  <div className="product-price">{product.price}</div>
-                  <button onSubmit={() => updateCart(product)} type="submit" className="product-add-to-cart">Add to Cart</button>
-                </div> 
-              )
-            })
+            filteredProducts.map(product => <SingleProduct product={product} key={product.id} />)
           ) : (
             <h2>No products available with that rating.</h2>
           )}
@@ -90,4 +76,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const AllProducts = connect(mapProducts, mapDispatch)(Products)
+export const AllProducts = withRouter(connect(mapProducts, mapDispatch)(Products))
