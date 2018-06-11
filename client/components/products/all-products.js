@@ -63,7 +63,7 @@ class Products extends Component {
                   <div className="product-rating">{product.rating}</div>
                   <div className="product-price">{product.price}</div>
                   <button onSubmit={() => updateCart(product)} type="submit" className="product-add-to-cart">Add to Cart</button>
-                </div>
+                </div> 
               )
             })
           ) : (
