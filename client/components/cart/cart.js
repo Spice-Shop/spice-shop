@@ -27,6 +27,7 @@ const CartItems = (props) => {
     )
   }
   else {
+    console.log(cart)
     return (
       <div className="cart-container">
         <h3>Cart</h3>
@@ -41,7 +42,7 @@ const CartItems = (props) => {
             }
             return (
               myProduct &&
-              <div key={cartItem.id} className="cart-item-container">
+              <div key={cartItem.productId} className="cart-item-container">
                 <div className="my-product-image-container">
                   <div className="my-product-imgUrl" style={myProductImage} />
                 </div>
@@ -76,13 +77,7 @@ const mapCart = (state) => {
 
 // const mapDispatch = (dispatch) => {
 //   return {
-//     handleSubmit (evt) {
-//       evt.preventDefault()
-//       const formName = evt.target.name
-//       const email = evt.target.email.value
-//       const password = evt.target.password.value
-//       dispatch(auth(email, password, formName))
-//     }
+    
 //   }
 // }
 

@@ -10,17 +10,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 /**
  * INITIAL STATE
  */
-const initialCart = [{
-  id: 1,
-  quantity: 1,
-  productId: 1,
-  orderId: 1
-}, {
-  id: 2,
-  quantity: 2,
-  productId: 2,
-  orderId: 1
-}]
+const initialCart = []
 
 /**
  * ACTION CREATORS
@@ -33,18 +23,23 @@ const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
 /**
  * THUNK CREATORS
  */
-// export function fetchProducts() {
-//     return function thunk(dispatch) {
-//       return axios
-//         .get('/api/cartItems')
-//         .then(res => res.data)
-//         .then(cartItems => {
-//           const action = getProducts(cartItems);
-//           dispatch(action);
-//         })
-//         .catch(err => console.log(err))
-//     };
-//   }
+export function fetchCart(userId) { //A refactor is required via model method to clean this up.
+    return function thunk(dispatch) {
+      return axios
+        .get(`/api/users/${userId}/orders`)
+        .then(res => {
+          let orderId = res.data[0].id
+          axios
+          .get(`/api/cart/${orderId}`)
+          .then(orderLineItems => orderLineItems.data)
+          .then(cartItems => {
+            const action = getCart(cartItems);
+            dispatch(action);
+          })
+        })
+        .catch(err => console.log(err))
+    };
+  }
 
 /**
  * REDUCER
