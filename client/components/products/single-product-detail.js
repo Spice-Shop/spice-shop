@@ -11,7 +11,7 @@ class SingleProductDetail extends Component {
         const productId = Number(this.props.match.params.id)
         const products = this.props.products
         const selectedProduct = products.filter((item) => item.id === productId )[0]
-          return selectedProduct ? 
+          return selectedProduct ?
           (
             <div key={selectedProduct.id} className="product-container">
               <div className="product-name">{selectedProduct.name}</div>
