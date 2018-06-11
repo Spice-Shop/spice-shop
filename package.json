@@ -1,5 +1,6 @@
 {
   "name": "spice-shop",
+  "title": "Spice Shop",
   "version": "1.0.0",
   "description": "Grace Shopper: Spice Shop",
   "engines": {
@@ -10,8 +11,9 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
+    "postdeploy": "node script/seed.js",
     "lint": "eslint ./ --ignore-path .gitignore",
-    "postinstall": "touch secrets.js",
+    "postinstall": "touch secrets.js node script/seed.js",
     "seed": "node script/seed.js",
     "seed-spice": "node script/spice-shop/seed.js",
     "start": "node server",

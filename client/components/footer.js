@@ -5,6 +5,7 @@ import { logout, updateLocation } from '../store'
 const pkg = require('../../package.json')
 
 //Path details for each navbar link
+//Path details for each navbar link
 const pathMap = [
   {
     path: '/',
@@ -35,34 +36,26 @@ const pathMap = [
     name: 'Order History',
     showWhenLoggedIn: true,
     showWhenLoggedOut: false
-  },
-  {
-    path: '/cart',
-    name: 'Cart',
-    showWhenLoggedIn: true,
-    showWhenLoggedOut: true
   }
 ]
 
-const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
+const Footer = ({ location, handleClick, checkLocation, isLoggedIn }) => {
 
   //Set active class on link click
   const setActive = (path) => {
-    return location === path ? 'nav-item active' : 'nav-item'
+    return location === path ? 'footer-item active' : 'footer-item'
   }
 
   return (
 
-    <div className="nav-bar-container">
-      <Link to="/">
-        <div className="nav-bar-title-container">
-          <div className="nav-bar-organic-image" />
-          <h1 className="nav-bar-title">{pkg.title}</h1>
+    <div className="footer-bar-container">
+      <div className="footer-bar-content">
+        <div className="footer-bar-title-container">
+          <h1 className="footer-bar-title">{pkg.title}</h1>
+          <div className="footer-bar-copy">Copyright 2018 {pkg.title}</div>
         </div>
-      </Link>
-      <nav>
         {isLoggedIn ? (
-          <div className="nav-bar">
+          <div className="footer-bar">
 
             {/* The navbar will show these links after you log in */}
             {/* Map all links based on path map object and login preference */}
@@ -72,12 +65,12 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
               )
             })}
 
-            <a href="#" className="nav-item" onClick={handleClick}>
+            <a className="footer-item" href="#" onClick={handleClick}>
               Logout
             </a>
           </div>
         ) : (
-            <div className="nav-bar">
+            <div className="footer-bar">
 
               {/* The navbar will show these links before you log in */}
               {/* Map all links based on path map object and login preference */}
@@ -89,8 +82,19 @@ const Navbar = ({ location, handleClick, checkLocation, isLoggedIn }) => {
 
             </div>
           )}
-      </nav>
+        <div className="footer-bar-kit">
+          <div className="footer-bar-kit-title">Keep In Touch</div>
+          <div className="footer-bar-kit-message">
+            Subscribe to {pkg.name} today and receive the latest spicy deals, delivered straight to your inbox!
+          </div>
+        </div>
+      </div>
+      <div className="footer-bar-social-container">
+        <div className="footer-bar-social-icon">Social icons should be lined up in this area of the footer</div>
+        <div className="footer-bar-social-message">Some long fancy message should be written here that takes up a lot of space to make the footer look really cool. Moreover the footer should be filled with sentences. Punctuation is key to the human eye! Short sentences are great. Long sentences are nice for ending this very long paragraph.</div>
+      </div>
     </div>
+
   )
 }
 
@@ -116,4 +120,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Footer)

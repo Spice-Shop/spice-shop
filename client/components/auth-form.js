@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {withRouter} from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -38,7 +39,6 @@ const AuthForm = (props) => {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 const mapLogin = (state) => {
-  console.log(state)
   return {
     name: 'login',
     displayName: 'Login',
@@ -66,8 +66,8 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = withRouter(connect(mapLogin, mapDispatch)(AuthForm))
+export const Signup = withRouter(connect(mapSignup, mapDispatch)(AuthForm))
 
 /**
  * PROP TYPES

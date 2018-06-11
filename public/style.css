@@ -1,5 +1,16 @@
+/* ------ Font Import ------ */
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+
+/* ------ Default Styles ------ */
+html {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
 }
 
 a {
@@ -13,6 +24,11 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-size: 12px;
+  font-family: Lato;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 400;
 }
 
 form div {
@@ -20,7 +36,163 @@ form div {
   display: inline-block;
 }
 
-/*-------- Product Grid ---------- */
+/*-------- App Sections ---------- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-container {
+  flex: auto;
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+
+/*-------- Header ---------- */
+.header-bar-container {
+  background: #292929;
+}
+
+.header-message {
+  font-style: italic;
+}
+
+.header-item:nth-child(2) {
+  margin-left: auto !important;
+}
+
+.header-bar-container .header-item {
+  color: #fff;
+  margin: 5px 20px;
+  font-size: 11px;
+  line-height: 1.57;
+  font-family: Lato;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 300;
+}
+
+.header-bar-container .header-item a {
+  color: #fff;
+}
+
+.header-bar {
+  display: flex;
+}
+
+
+/*-------- Navbar ---------- */
+.nav-bar-title-container {
+  display: inline-flex;
+  align-items: center;
+  margin: 7px 0px;
+}
+
+.nav-bar-organic-image {
+  background: url('../images/organic-products.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 81px;
+  height: 93px;
+}
+
+.nav-bar-title {
+  color: #569222;
+  font-size: 35px;
+  font-family: Lato;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0px 20px;
+  padding: 4px 0px;
+  position: relative;
+  top: 8px;
+}
+
+.nav-bar-container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-bar {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.nav-item {
+  transition: .3s ease-in-out;
+  color: #000;
+}
+
+.nav-bar .nav-item:nth-child(3) {
+  margin-left: auto;
+}
+
+.nav-item:hover {
+  border-bottom: 2px solid #eeb843;
+  margin-bottom: -1px;
+}
+
+.nav-item.active {
+  border-bottom: 2px solid #3ab87c;
+    margin-bottom: -1px;
+}
+
+/*-------- Home Landing ---------- */
+.home-hero {
+  position: relative;
+  background-image: url(../images/spice-landing.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: 8%;
+  height: 40vh;
+  color: #fff;
+  margin-left: -40vw;
+  left: 20vw;
+}
+
+.home-hero-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(33, 33, 33, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-small-title {
+  margin: 5px 20px;
+  font-size: 14px;
+  line-height: 1.57;
+  font-family: Lato;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 300;
+}
+
+.home-title {
+  font-size: 120px;
+  line-height: 1;
+  font-family: Montserrat;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  margin: 30px;
+}
+
+/*-------- Products Grid ---------- */
 .product-container {
   width: 200px;
   border-bottom: 2px solid #000;
@@ -41,4 +213,154 @@ form div {
   height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+/*-------- Cart ---------- */
+.cart-item-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-left: 3px solid #000;
+}
+
+.my-product-quantity-container {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+}
+
+.parent-cart-container {
+  background: #efefef;
+  padding: 10px;
+}
+
+.my-product-image-container {
+  width: 100px;
+  height: 100px;
+  border: 1px dashed;
+  padding: 5px;
+}
+
+.my-product-imgUrl {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.my-product-text-container {
+  margin-left: 20px;
+}
+
+input.my-product-quantity-input {
+  font-size: 30px;
+  text-align: center;
+  height: 56px;
+}
+
+
+/*-------- Footer ---------- */
+.footer-bar-container {
+  background: #1b1010;
+  color: #ffff;
+  min-height: 200px;
+  padding: 40px 0px;
+}
+
+.footer-bar-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  padding-bottom: 100px;
+}
+
+.footer-bar-container .footer-item {
+  color: #fff;
+  margin: 5px 20px 5px 0px;
+  font-size: 11px;
+  line-height: 1.57;
+  font-family: Lato;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 300;
+}
+
+.footer-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-bar-title {
+  color: #569222;
+  font-size: 35px;
+  font-family: Lato;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.footer-bar-copy {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+}
+
+.footer-bar-content > div:not(:first-child) {
+  border-left: 1px solid #c1c1c1;
+  padding-left: 20px;
+}
+
+.footer-bar-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 130px;
+}
+
+.footer-bar-kit {
+  margin-left: 20px;
+  max-width: 500px;
+}
+
+.footer-bar-kit-title {
+  color: #eeb743;
+  font-size: 35px;
+  font-family: Lato;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.footer-bar-kit-message {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+}
+
+.footer-bar-social-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-bar-social-message {
+  text-align: center;
+  max-width: 800px;
+  color: #cacaca;
+  font-size: 11px;
+  font-weight: 300;
 }

@@ -17,14 +17,18 @@ class Products extends Component {
   }
 
   render() {
+    console.log(this.props.state);
+    const {updateCart} = this.props.state
     const products = this.props.state.products || []
+
     const filteredProducts = this.state.filtered
+
       ? products.filter(product => {
           return product.rating === this.state.filtered
         })
       : products
     return (
-      <div>
+      <div className="main-product-container">
         <h3>Products</h3>
         <h2>
           <button name="1" onClick={this.handleFilter}>
@@ -57,7 +61,9 @@ class Products extends Component {
                     {product.description}
                   </div>
                   <div className="product-rating">{product.rating}</div>
-                </div>
+                  <div className="product-price">{product.price}</div>
+                  <button onSubmit={() => updateCart(product)} type="submit" className="product-add-to-cart">Add to Cart</button>
+                </div> 
               )
             })
           ) : (
@@ -76,4 +82,12 @@ const mapProducts = state => {
   }
 }
 
-export const AllProducts = connect(mapProducts)(Products)
+const mapDispatch = dispatch => {
+  return {
+    updateCart: (product) => {
+      console.log(this.props.state.cart)
+    }
+  }
+}
+
+export const AllProducts = connect(mapProducts, mapDispatch)(Products)

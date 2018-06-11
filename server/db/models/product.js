@@ -17,6 +17,9 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT
   },
+  price: {
+    type: Sequelize.DECIMAL(10, 2)
+  },
   rating: {
     type: Sequelize.INTEGER,
     min: 1,

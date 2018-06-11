@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar } from './components'
+import { Header, Navbar, Footer } from './components'
 import Routes from './routes'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -15,11 +15,14 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
-      <div>
+      <div className="app-container">
+        <Header />
         <Navbar />
-        <Routes />
+        <div className="main-container">
+          <Routes />
+        </div>
+        <Footer />
       </div>
     )
   }

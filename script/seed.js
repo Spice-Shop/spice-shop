@@ -30,6 +30,7 @@ async function seed () {
       description: 'great for pizza',
       imgUrl: 'https://cdn.shopify.com/s/files/1/0156/0137/products/refill_0020_oregano.jpg?v=1522849769',
       rating: 3,
+      price: 1.00,
       originCategory: 'Italy'
     }),
     Product.create({
@@ -37,6 +38,7 @@ async function seed () {
       description: 'great for pizza',
       imgUrl: 'https://www.hiltonherbs.com/image/cache/data/STRAIGHT%20HERBS/Curcuma-600x600.jpg',
       rating: 4,
+      price: 4.00,
       originCategory: 'India'
     }),
     Product.create({
@@ -44,12 +46,14 @@ async function seed () {
       description: 'great for pizza',
       imgUrl: 'https://static.thespicehouse.com/images/image/40/large_pepper.JPG',
       rating: 5,
+      price: 2.00,
       originCategory: 'Vietnam'
     }),
     Product.create({
       name: 'Curry', description: 'great for pizza',
       imgUrl: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/spice_rack_herbs_slideshow/getty_rf_photo_of_variety_of_spices_in_bowls.jpg',
       rating: 5,
+      price: 3.00,
       originCategory: 'Vietnam'
     })
   ])
