@@ -5,6 +5,9 @@ const Sequelize = require('sequelize')
 const OrderLineItem = db.define('orderLineItem', {
     quantity: {
         type: Sequelize.INTEGER
+    },
+    subtotal: {
+        type: Sequelize.INTEGER
     }
 })
 
