@@ -4,10 +4,15 @@ const Sequelize = require('sequelize')
 //This is our product route
 const Product = db.define('product', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
-  imgUrl: {
-    type: Sequelize.STRING
+  imgUrl: { //CG: validate as a url. defaultValue
+    type: Sequelize.STRING,
+    defaultValue: 'https://www.organicfacts.net/wp-content/uploads/2013/08/Spices.jpg',
+    validate: {
+      isUrl: true
+    }
   },
   description: {
     type: Sequelize.TEXT
@@ -20,8 +25,18 @@ const Product = db.define('product', {
     min: 1,
     max: 5
   },
-  originCategory: {
-    type: Sequelize.STRING
+  heatLevel: {
+    type: Sequelize.ENUM('mild', 'medium', 'hot')
+  }, // an infinite amount...this is great.
+    //if therea are exactly 3-10 categories we can use an ENUM
+    //if we want control over our infinite amount of categories we can use another model 
+    /*
+    Category Ideas
+    -Heat
+    -Cuisuine
+    */
+  price: {
+    type: Sequelize.INTEGER
   }
 })
 
