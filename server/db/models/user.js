@@ -71,6 +71,15 @@ User.getCart = function (userId) {
     })
 }
 
+User.findByUserId = function(userId) {
+  return Order.findOne({
+    where: {
+      orderPlaced: false,
+      userId
+    }
+  })
+}
+
 /**
  * hooks
  */

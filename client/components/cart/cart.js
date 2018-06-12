@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { updateQuantity, changeLineItemQuantity } from  '../../store/cart'
+import { updateQuantity, placeOrder } from  '../../store/cart'
 
 /**
  * COMPONENT
@@ -15,6 +15,7 @@ const CartItems = (props) => {
   const products = props.state.products
   const updateQuant = props.updateQuant
   const handleChange = props.handleChange
+  const handleSubmit = props.handleSubmit
   const userId = props.state.user.id
 
   // const findProductsById = (products, id) => {
@@ -57,15 +58,15 @@ const CartItems = (props) => {
                   <div className="product-price">{myProduct.price}</div>
                 </div>
                 <div className="my-product-quantity-container">
-                    <input onChange={(event) => handleChange(cartItem, event)} className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
-                    <button onClick={() => updateQuant(cartItem, userId) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                    <input onChange={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    {/*<button onClick={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>*/}
                     <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                 </div>
               </div>
             )
           })}
           <div className="cart-total">{/* PUT SUBTOTAL ON STATE, THIS SHOULD BE RENDERED BY TOTAL ON STATE */}</div>
-          <button className="cart-submit" type="submit">Checkout</button>
+          <button onClick={() => handleSubmit(userId)} className="cart-submit" type="submit">Checkout</button>
         </div>
       </div>
     )
@@ -81,11 +82,8 @@ const mapCart = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleChange: (cartItem, event) => {
-      let quantity = event.target.value
-      dispatch(changeLineItemQuantity(quantity, cartItem))
-    },
-    updateQuant: (cartItem, userId) => dispatch(updateQuantity(cartItem, userId))
+    updateQuant: (cartItem, userId, event) => dispatch(updateQuantity(cartItem, userId, event)),
+    handleSubmit: (userId) => dispatch(placeOrder(userId))
   }
 }
 

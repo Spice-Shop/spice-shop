@@ -35,7 +35,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    cart: state.cart
   }
 }
 

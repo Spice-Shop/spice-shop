@@ -5,8 +5,8 @@ import axios from 'axios'
  */
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
-const CHANGE_LINE_ITEM_QUANTITY = 'CHANGE_LINE_ITEM_QUANTITY'
 const UPDATE_LINE_ITEM_QUANTITY = 'UPDATE_LINE_ITEM_QUANTITY'
+const CLEAR_CART = 'CLEAR_CART'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
@@ -19,8 +19,8 @@ const initialCart = []
  */
 export const getCart = cartItems => ({type: GET_CART, cartItems})
 export const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
-export const changeLineItemQuantity = (quantity, cartItem) => ({type: CHANGE_LINE_ITEM_QUANTITY, quantity, cartItem})
 export const updateLineItemQuantity = quantity => ({type: UPDATE_LINE_ITEM_QUANTITY, quantity})
+export const clearCart = () => ({type: CLEAR_CART})
 // const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -38,15 +38,32 @@ export function fetchCart(userId) {
     };
   }
 
-export function updateQuantity(cartItem, userId) {
+export function updateQuantity(cartItem, userId, event) {
+  let quantity = event.target.value
+  cartItem.quantity = quantity
+
   return function thunk(dispatch) {
     return axios
         .put(`/api/users/${userId}/cart`, cartItem)
-        // .then(cartItems => {
-        //   const action = getCart(cartItems.data);
-        //   dispatch(action);
-        // })
-        // .catch(err => console.log(err))
+        .then(() => {
+          const action = fetchCart(userId);
+          dispatch(action);
+        })
+        .catch(err => console.log(err))
+  }
+}
+
+export function placeOrder(userId) {
+
+  return function thunk(dispatch) {
+    return axios
+        .put(`/api/users/${userId}/placeOrder`)
+        .then(() => dispatch(clearCart()))
+        .then(() => {
+          const action = fetchCart(userId);
+          dispatch(action);
+        })
+        .catch(err => console.log(err))
   }
 }
 
@@ -59,10 +76,8 @@ export default function (state = initialCart, action) {
       return action.cartItems
     case ADD_TO_CART:
       return [...state, action.cartItem]
-    case CHANGE_LINE_ITEM_QUANTITY:
-      return 
-    case UPDATE_LINE_ITEM_QUANTITY:
-      return action.quantity
+    case CLEAR_CART:
+      return []
     // case REMOVE_USER:
     //   return defaultUser
     default:
