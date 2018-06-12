@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+const UPDATE_LINE_ITEM_QUANITY = 'UPDATE_LINE_ITEM_QUANITY'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
@@ -16,30 +17,36 @@ const initialCart = []
  * ACTION CREATORS
  */
 const getCart = cartItems => ({type: GET_CART, cartItems})
-
 const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
+const updateLineItemQuantity = quantity => ({type: UPDATE_LINE_ITEM_QUANITY, quantity})
 // const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
-export function fetchCart(userId) { //A refactor is required via model method to clean this up.
+export function fetchCart(userId) {
     return function thunk(dispatch) {
       return axios
-        .get(`/api/users/${userId}/orders`)
-        .then(res => {
-          let orderId = res.data[0].id
-          axios
-          .get(`/api/cart/${orderId}`)
-          .then(orderLineItems => orderLineItems.data)
-          .then(cartItems => {
-            const action = getCart(cartItems);
-            dispatch(action);
-          })
+        .get(`/api/users/${userId}/cart`)
+        .then(cartItems => {
+          const action = getCart(cartItems.data);
+          dispatch(action);
         })
         .catch(err => console.log(err))
     };
   }
+
+export function updateQuantity(cartItem) {
+  return function thunk(dispatch) {
+    return axios
+        .put(`/api/users/${userId}/cart`)
+        .then(cartItems => {
+          const action = getCart(cartItems.data);
+          dispatch(action);
+        })
+        .catch(err => console.log(err))
+  }
+} 
 
 /**
  * REDUCER

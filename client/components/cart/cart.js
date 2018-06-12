@@ -2,15 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+
 /**
  * COMPONENT
  */
 
 const CartItems = (props) => {
   //set cart var
-  const cart = props.state.cart;
+  const cart = props.state.cart
   //set products var
-  const products = props.state.products;
+  const products = props.state.products
+  const updateQuantity = props.state.updateQuantity
 
   // const findProductsById = (products, id) => {
   //   products.filter
@@ -27,7 +29,6 @@ const CartItems = (props) => {
     )
   }
   else {
-    console.log(cart)
     return (
       <div className="cart-container">
         <h3>Cart</h3>
@@ -54,7 +55,7 @@ const CartItems = (props) => {
                 </div>
                 <div className="my-product-quantity-container">
                     <input className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
-                    <button className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                    <button onClick={() => updateQuantity(cartItem) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
                     <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                 </div>
               </div>
@@ -75,10 +76,10 @@ const mapCart = (state) => {
   }
 }
 
-// const mapDispatch = (dispatch) => {
-//   return {
-    
-//   }
-// }
+const mapDispatch = (dispatch) => {
+  return {
+    updateQuantity: () => dispatch(updateQuantity(cartItem))
+  }
+}
 
-export const Cart = withRouter(connect(mapCart)(CartItems))
+export const Cart = withRouter(connect(mapCart, mapDispatch)(CartItems))
