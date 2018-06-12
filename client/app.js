@@ -4,6 +4,8 @@ import Routes from './routes'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchProducts } from './store/products'
+import { fetchCart } from './store/cart'
+import { fetchAllUsers } from './store/all-users'
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +14,11 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData()
+    this.props.fetchInitialUsers()
+  }
+
+  componentDidUpdate() {
+    this.props.userId && this.props.fetchCart(this.props.userId)
   }
 
   render() {
@@ -28,13 +35,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.id,
+    cart: state.cart
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchInitialData: () => dispatch(fetchProducts())
+    fetchInitialData: () => dispatch(fetchProducts()),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    fetchInitialUsers: () => dispatch(fetchAllUsers())
   }
 }
 

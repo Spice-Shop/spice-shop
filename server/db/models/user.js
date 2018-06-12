@@ -1,6 +1,8 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
+const OrderLineItem = require('./order-line-item')
 
 const User = db.define('user', {
   email: {
@@ -16,11 +18,15 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
-    get () {
+    get() {
       return () => this.getDataValue('salt')
     }
   },
@@ -51,6 +57,31 @@ User.encryptPassword = function (plainText, salt) {
     .update(plainText)
     .update(salt)
     .digest('hex')
+}
+
+User.getCart = function (userId) {
+  return Order.findAll({
+      where: {
+        userId,
+        orderPlaced: false
+      }
+    })
+    .then(returnedOrder => {
+      return OrderLineItem.findAll({
+        where: {
+          orderId: returnedOrder[0].dataValues.id
+        }
+      })
+    })
+}
+
+User.findByUserId = function(userId) {
+  return Order.findOne({
+    where: {
+      orderPlaced: false,
+      userId
+    }
+  })
 }
 
 /**

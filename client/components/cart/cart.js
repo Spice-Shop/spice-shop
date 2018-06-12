@@ -2,15 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import { updateQuantity, placeOrder } from  '../../store/cart'
+
 /**
  * COMPONENT
  */
 
 const CartItems = (props) => {
   //set cart var
-  const cart = props.state.cart;
+  const cart = props.state.cart
   //set products var
-  const products = props.state.products;
+  const products = props.state.products
+  const updateQuant = props.updateQuant
+  const handleChange = props.handleChange
+  const handleSubmit = props.handleSubmit
+  const userId = props.state.user.id
 
   // const findProductsById = (products, id) => {
   //   products.filter
@@ -41,7 +47,7 @@ const CartItems = (props) => {
             }
             return (
               myProduct &&
-              <div key={cartItem.id} className="cart-item-container">
+              <div key={cartItem.productId} className="cart-item-container">
                 <div className="my-product-image-container">
                   <div className="my-product-imgUrl" style={myProductImage} />
                 </div>
@@ -52,15 +58,15 @@ const CartItems = (props) => {
                   <div className="product-price">{myProduct.price}</div>
                 </div>
                 <div className="my-product-quantity-container">
-                    <input className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
-                    <button className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                    <input onChange={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    {/*<button onClick={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>*/}
                     <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                 </div>
               </div>
             )
           })}
           <div className="cart-total">{/* PUT SUBTOTAL ON STATE, THIS SHOULD BE RENDERED BY TOTAL ON STATE */}</div>
-          <button className="cart-submit" type="submit">Checkout</button>
+          <button onClick={() => handleSubmit(userId)} className="cart-submit" type="submit">Checkout</button>
         </div>
       </div>
     )
@@ -74,16 +80,11 @@ const mapCart = (state) => {
   }
 }
 
-// const mapDispatch = (dispatch) => {
-//   return {
-//     handleSubmit (evt) {
-//       evt.preventDefault()
-//       const formName = evt.target.name
-//       const email = evt.target.email.value
-//       const password = evt.target.password.value
-//       dispatch(auth(email, password, formName))
-//     }
-//   }
-// }
+const mapDispatch = (dispatch) => {
+  return {
+    updateQuant: (cartItem, userId, event) => dispatch(updateQuantity(cartItem, userId, event)),
+    handleSubmit: (userId) => dispatch(placeOrder(userId))
+  }
+}
 
-export const Cart = withRouter(connect(mapCart)(CartItems))
+export const Cart = withRouter(connect(mapCart, mapDispatch)(CartItems))
