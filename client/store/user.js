@@ -5,7 +5,6 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
-const GET_ALL_USERS = 'GET_ALL_USERS'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -17,18 +16,11 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
-const getAllUsers = users => ({type: GET_ALL_USERS, users})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
-export const fetchAllUsers = () => dispatch => {
-  axios
-    .get('/api/users')
-    .then(result => dispatch(getAllUsers(result.data)))
-    .catch(err => console.error('Fetching users unsuccessful', err))
-}
 
 export const me = () =>
   dispatch =>
@@ -66,8 +58,6 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
-    case GET_ALL_USERS:
-      return action.users
     default:
       return state
   }

@@ -32,7 +32,9 @@ export const UserHome = (props) => {
  * CONTAINER
  */
 const mapState = (state) => {
+  console.log(state.allUsers)
   return {
+    allUsers: state.allUsers,
     email: state.user.email,
     isAdmin: state.user.isAdmin
   }
