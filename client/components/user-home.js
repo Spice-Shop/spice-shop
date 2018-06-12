@@ -7,9 +7,9 @@ import {AllProducts} from './products/all-products'
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email, isAdmin} = props
+  const {email, isAdmin, allUsers} = props
   return isAdmin ? (
-    <div>
+    <div className="main-product-container">
     <div>
       <h3>Welcome, {email}</h3>
     </div>
@@ -21,7 +21,20 @@ export const UserHome = (props) => {
     </div>
     <div>
         <h3>MANAGE USERS</h3>
-       
+        <div className="parent-product-container">
+          {allUsers.length ? (
+            allUsers.map(user => {
+            return (
+            <div key={user.id} className="product-container">
+              <div className="product-id">User ID: {user.id}</div>
+              <div className="product-email">User Email: {user.email}</div>
+            </div>
+            )}
+          )
+          ) : (
+            <h2>There are currently no users to manage</h2>
+          )}
+        </div>
     </div>
     </div>
   )
