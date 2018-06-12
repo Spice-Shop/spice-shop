@@ -88,6 +88,15 @@ User.findOrderByUserId = function(userId) {
   })
 }
 
+User.findOrderHistoryByUserId = function(userId) {
+  return Order.findAll({
+    where: {
+      orderPlaced: true,
+      userId
+    }
+  })
+}
+
 /**
  * hooks
  */

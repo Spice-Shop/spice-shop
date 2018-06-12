@@ -31,7 +31,7 @@ const pathMap = [
     showWhenLoggedOut: true
   },
   {
-    path: '/user',
+    path: '/order-history',
     name: 'Order History',
     showWhenLoggedIn: true,
     showWhenLoggedOut: false
