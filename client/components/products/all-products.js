@@ -28,9 +28,6 @@ class Products extends Component {
     return (
       <div className="main-product-container">
         <h3>Products</h3>
-        {this.state.deletedProduct ? (
-          <h1>You've just deleted {this.state.deletedProduct}</h1>
-        ) : null}
         <h2>
           <button name="1" onClick={this.handleFilter}>
             ⭐️
