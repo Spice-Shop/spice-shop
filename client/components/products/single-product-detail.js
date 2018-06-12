@@ -33,17 +33,15 @@ class SingleProductDetail extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { user } = this.props
-    const authorized = user.id && user.isAdmin
-    console.log(authorized)
+    const authorized = !!(user.id && user.isAdmin)
     const productId = Number(this.props.match.params.id)
     const products = this.props.products
     const selectedProduct = products.filter(item => item.id === productId)[0]
     return selectedProduct ? (
       <div key={selectedProduct.id} className="product-container">
         <ContentEditable
-          readOnly={!authorized}
+          disabled={!authorized}
           className="product-name"
           value={selectedProduct.name}
           html={selectedProduct.name}
@@ -52,7 +50,7 @@ class SingleProductDetail extends Component {
         />
         <img className="product-imgUrl" src={selectedProduct.imgUrl} />
         <ContentEditable
-          readOnly={!authorized}
+          disabled={!authorized}
           value={selectedProduct.description}
           html={selectedProduct.description}
           onChange={evt =>
