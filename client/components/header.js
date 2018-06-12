@@ -6,7 +6,7 @@ import { logout, updateLocation } from '../store'
 //Path details for each navbar link
 const pathMap = [
     {
-        path: '/home',
+        path: '/user',
         name: 'My Settings',
         showWhenLoggedIn: true,
         showWhenLoggedOut: false

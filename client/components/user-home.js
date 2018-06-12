@@ -8,6 +8,7 @@ import {AllProducts} from './products/all-products'
  */
 export const UserHome = (props) => {
   const {email, isAdmin, allUsers} = props
+  
   return isAdmin ? (
     <div className="main-product-container">
     <div>
@@ -28,6 +29,7 @@ export const UserHome = (props) => {
             <div key={user.id} className="product-container">
               <div className="product-id">User ID: {user.id}</div>
               <div className="product-email">User Email: {user.email}</div>
+              <div className="product-admin">User Type: {user.isAdmin ? 'Admin User' : 'Standard User'}</div>
             </div>
             )}
           )
