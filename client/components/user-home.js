@@ -46,7 +46,7 @@ export const UserHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     allUsers: state.allUsers,
     email: state.user.email,

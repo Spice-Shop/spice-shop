@@ -38,6 +38,25 @@ router.get('/:userId/cart', (req, res, next) => {
   }
 })
 
+router.get('/:userId/order-history', (req, res, next) => {
+  let userId = req.params.userId
+  if (Number(userId) === req.user.id) {
+    User.findOrderHistoryByUserId(userId)
+      .then(returnedOrderHistory => {
+        if (!returnedOrderHistory.length) {
+          res.send('There are no past orders to display')
+        } else {
+          res.json(returnedOrderHistory)
+        }
+      })
+      .catch(next)
+  } else {
+    res.status(403).send('Sorry you do not have permission to view this page')
+  }
+})
+
+
+
 // Update Line Item quantity & subtotal
 router.put('/:userId/cart', (req, res, next) => {
   let productId = req.body.productId
