@@ -15,11 +15,6 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchInitialData()
     this.props.fetchInitialUsers()
-    // this.props.userId && this.props.fetchCart(this.props.userId)
-  }
-
-  componentDidUpdate() {
-    this.props.userId && this.props.fetchCart(this.props.userId)
   }
 
   render() {
@@ -46,7 +41,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchInitialData: () => dispatch(fetchProducts()),
-    fetchCart: (userId) => dispatch(fetchCart(userId)),
     fetchInitialUsers: () => dispatch(fetchAllUsers())
   }
 }
