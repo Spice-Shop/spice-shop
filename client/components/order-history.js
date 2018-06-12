@@ -15,7 +15,6 @@ class History extends Component {
 
   render() {
     const orderHistory = this.props.orderHistory
-    console.log("HEYYYYY", typeof orderHistory)
     return (
       <div className="main-product-container">
         <h3>Order History</h3>
@@ -25,7 +24,7 @@ class History extends Component {
             <div key={order.id} className="product-container">
                 <div>Order Number: {order.id}</div>
             <div className="product-price">
-                {`$ ${order.total.toFixed(2)}`}
+                Order Total: {`$ ${order.total.toFixed(2)}`}
               </div>
             </div>
             ))
