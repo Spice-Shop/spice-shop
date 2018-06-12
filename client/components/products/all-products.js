@@ -1,32 +1,28 @@
 import React, { Component } from 'react'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import SingleProduct from './single-product' 
+import SingleProduct from './single-product'
 
-//--------------Component-------------------
 class Products extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      filtered: 0
+      filteredStars: 0
     }
     this.handleFilter = this.handleFilter.bind(this)
   }
 
   handleFilter(e) {
     let value = parseInt(e.target.name, 10)
-    this.setState({ filtered: value })
+    this.setState({ filteredStars: value })
   }
 
   render() {
-    
-    const {updateCart} = this.props.state
-    const products = this.props.state.products || []
-
-    const filteredProducts = this.state.filtered
-
+    const { updateCart } = this.props.state
+    const products = this.props.state.products
+    const filteredStarsProducts = this.state.filteredStars
       ? products.filter(product => {
-          return product.rating === this.state.filtered
+          return product.rating === this.state.filteredStars
         })
       : products
     return (
@@ -50,8 +46,10 @@ class Products extends Component {
           </button>
         </h2>
         <div className="parent-product-container">
-          {filteredProducts.length ? (
-            filteredProducts.map(product => <SingleProduct product={product} key={product.id} />)
+          {filteredStarsProducts.length ? (
+            filteredStarsProducts.map(product => (
+              <SingleProduct product={product} key={product.id} />
+            ))
           ) : (
             <h2>No products available with that rating.</h2>
           )}
@@ -70,10 +68,15 @@ const mapProducts = state => {
 
 const mapDispatch = dispatch => {
   return {
-    updateCart: (product) => {
+    updateCart: product => {
       console.log(this.props.state.cart)
     }
   }
 }
 
-export const AllProducts = withRouter(connect(mapProducts, mapDispatch)(Products))
+export const AllProducts = withRouter(
+  connect(
+    mapProducts,
+    mapDispatch
+  )(Products)
+)
