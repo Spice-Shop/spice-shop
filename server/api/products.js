@@ -32,16 +32,16 @@ router.post('/', (req, res, next) => {
 
 //Get Single Product Route
 router.get('/:productId', (req, res, next) => {
-  let product = req.params.productId;
+  let product = req.params.productId
 
   Product.findById(product)
     .then(product => res.json(product))
-    .catch(next);
+    .catch(next)
 })
 
 //Update Single Product Route
 router.put('/:productId', (req, res, next) => {
-  let product = req.params.productId;
+  let product = req.params.productId
 
   Product.findById(product)
     .then(foundProduct => foundProduct.update(req.body))
@@ -51,11 +51,11 @@ router.put('/:productId', (req, res, next) => {
 
 //Delete Single Product Route
 router.delete('/:productId', (req, res, next) => {
-  let product = req.params.productId;
+  let product = req.params.productId
 
   Product.findById(product)
     .then(foundProduct => foundProduct.destroy())
-    .then(res.status(204))
+    .then(res.sendStatus(204))
     .catch(next)
 })
 

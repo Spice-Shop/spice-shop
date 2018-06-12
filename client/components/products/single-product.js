@@ -11,22 +11,20 @@ class SingleProduct extends Component {
       backgroundImage: `url('${product.imgUrl}')`
     }
     return (
-      <Link to={`/products/${product.id}`}>
-        <div key={product.id} className="product-container">
+      <div key={product.id} className="product-container">
+        <Link to={`/products/${product.id}`}>
           <div className="product-name">{product.name}</div>
           <div className="product-imgUrl" style={productImage} />
           <div className="product-description">{product.description}</div>
-          <div className="product-rating">{`${'⭐'.repeat(
-            product.rating
-          )}`}</div>
+          <div className="product-rating">
+            {`${'⭐'.repeat(product.rating)}`}
+          </div>
           <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
-          {authorized && (
-            <button onClick={() => removeProduct(product.id)}>
-              <span />
-            </button>
-          )}
-        </div>
-      </Link>
+        </Link>
+        {authorized && (
+          <button onClick={() => removeProduct(product.id)}>Delete</button>
+        )}
+      </div>
     )
   }
 }
