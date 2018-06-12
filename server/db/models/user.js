@@ -67,15 +67,19 @@ User.getCart = function (userId) {
       }
     })
     .then(returnedOrder => {
-      return OrderLineItem.findAll({
-        where: {
-          orderId: returnedOrder[0].dataValues.id
-        }
-      })
+      if (returnedOrder[0]) {
+        return OrderLineItem.findAll({
+          where: {
+            orderId: returnedOrder[0].dataValues.id
+          }
+        })
+      } else {
+        return []
+      }
     })
 }
 
-User.findByUserId = function(userId) {
+User.findOrderByUserId = function(userId) {
   return Order.findOne({
     where: {
       orderPlaced: false,
