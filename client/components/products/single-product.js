@@ -6,7 +6,7 @@ import { removeProduct } from '../../store/products'
 class SingleProduct extends Component {
   render() {
     const { product, removeProduct, user } = this.props
-    const authorized = user && user.isAdmin
+    const authorized = !!(user.id && user.isAdmin)
     let productImage = {
       backgroundImage: `url('${product.imgUrl}')`
     }
