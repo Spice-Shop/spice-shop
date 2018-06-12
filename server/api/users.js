@@ -71,11 +71,16 @@ router.put('/:userId/cart', (req, res, next) => {
 
 router.put('/:userId/placeOrder', (req, res, next) => {
   let userId = req.params.userId;
-  User.findByUserId(userId)
-  .then(foundOrder => {
-    return foundOrder.update({
-      orderPlaced: true
+  if (Number(userId) === req.user.id) {
+    User.findOrderByUserId(userId)
+    .then(foundOrder => {
+      return foundOrder.update({
+        orderPlaced: true
+      })
     })
-  })
-  .then(res.status(204))
+    .then(res.status(204))
+    .catch(next)
+  } else {
+    res.status(403).send('Sorry you do not have permission to place this order')
+  }
 })

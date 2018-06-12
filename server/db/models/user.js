@@ -79,7 +79,7 @@ User.getCart = function (userId) {
     })
 }
 
-User.findByUserId = function(userId) {
+User.findOrderByUserId = function(userId) {
   return Order.findOne({
     where: {
       orderPlaced: false,

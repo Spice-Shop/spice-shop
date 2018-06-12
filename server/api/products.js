@@ -25,9 +25,13 @@ router.get('/', (req, res, next) => {
 
 //Creat New Product Route
 router.post('/', (req, res, next) => {
-  Product.create(req.body)
-    .then(product => res.status(201).json(product))
-    .catch(next)
+  if (req.user.isAdmin) {
+    Product.create(req.body)
+      .then(product => res.status(201).json(product))
+      .catch(next)
+  } else {
+    res.status(403).send('Sorry you do not have permission to access this')
+  }
 })
 
 //Get Single Product Route
