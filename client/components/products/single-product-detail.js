@@ -13,7 +13,6 @@ class SingleProductDetail extends Component {
     }
     this.onProductUpdate = this.onProductUpdate.bind(this)
   }
-
   componentWillReceiveProps(newProps, oldProps) {
     if (newProps.product !== oldProps.product) {
       this.setState({
@@ -24,16 +23,21 @@ class SingleProductDetail extends Component {
   // componentDidMount() {
   //     this.props.fetchInitialData()
   // }
+  onProductUpdate(productUpdateObj) {
+    const { debouncedUpdateProduct } = this.props
+    const { product } = this.state
+    this.setState({
+      product: Object.assign(product, productUpdateObj)
+    })
+    debouncedUpdateProduct(product.id, productUpdateObj)
+  }
 
   render() {
     const { currentUser } = this.props
-    const product = this.state.product
-    if (!product) return <div />
     const authorized = currentUser && currentUser.isAdmin
     const productId = Number(this.props.match.params.id)
     const products = this.props.products
     const selectedProduct = products.filter(item => item.id === productId)[0]
-    console.log('we are in the details')
     return selectedProduct ? (
       <div key={selectedProduct.id} className="product-container">
         <input
@@ -47,30 +51,28 @@ class SingleProductDetail extends Component {
         <input
           readOnly={!authorized}
           className="product-description"
-          value={selected.description}
+          value={selectedProduct.description}
           onChange={evt =>
             this.onProductUpdate({ description: evt.target.value })
           }
           contentEditable={!!authorized}
         />
-        <div className="product-rating">{`${'⭐'.repeat(
-          selectedProduct.rating
-        )}`}</div>
-        <div className="product-price">{`$ ${selectedProduct.price.toFixed(
-          2
-        )}`}</div>
+        <div className="product-rating">
+          {`${'⭐'.repeat(selectedProduct.rating)}`}
+        </div>
+        <div className="product-price">
+          {`$ ${selectedProduct.price.toFixed(2)}`}
+        </div>
+        <ContentEditable
+          disabled={!authorized}
+          placeholder="(text here)"
+          html={this.state.product}
+          onChange={evt => console.log('hello', evt.target.value)}
+        />
       </div>
     ) : (
       <h3>PRODUCT NOT FOUND</h3>
     )
-  }
-  onProductUpdate(productUpdateObj) {
-    const { debouncedUpdateProduct } = this.props
-    const { product } = this.state
-    this.setState({
-      product: Object.assign(product, productUpdateObj)
-    })
-    debouncedUpdateProduct(product.id, productUpdateObj)
   }
 }
 
