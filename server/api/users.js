@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:userId/cart', (req, res, next) => {
-  let userId = req.params.userId
+  let userId = req.user.id
 
   User.getCart(userId)
     .then(returnedCartLineItems => {
