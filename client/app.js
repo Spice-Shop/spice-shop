@@ -15,6 +15,7 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchInitialData()
     this.props.fetchInitialUsers()
+    // this.props.userId && this.props.fetchCart(this.props.userId)
   }
 
   componentDidUpdate() {

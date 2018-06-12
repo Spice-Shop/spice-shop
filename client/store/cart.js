@@ -27,6 +27,7 @@ export const clearCart = () => ({type: CLEAR_CART})
  * THUNK CREATORS
  */
 export function fetchCart(userId) {
+    if(userId) {
     return function thunk(dispatch) {
       return axios
         .get(`/api/users/${userId}/cart`)
@@ -36,6 +37,7 @@ export function fetchCart(userId) {
         })
         .catch(err => console.log(err))
     };
+  }
   }
 
 export function updateQuantity(cartItem, userId, event) {
