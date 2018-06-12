@@ -22,26 +22,26 @@ class Products extends Component {
     const products = this.props.state.products
     const filteredStarsProducts = this.state.filteredStars
       ? products.filter(product => {
-          return product.rating === this.state.filteredStars
+          return product.rating >= this.state.filteredStars
         })
       : products
     return (
       <div className="main-product-container">
         <h3>Products</h3>
         <h2>
-          <button name="1" onClick={this.handleFilter}>
-            ⭐️
+          <button name="1" className="star-buttons" onClick={this.handleFilter}>
+            {this.state.filteredStars <= 1 ? '⭐️' : '💩'}
           </button>
-          <button name="2" onClick={this.handleFilter}>
-            ⭐️
+          <button name="2" className="star-buttons" onClick={this.handleFilter}>
+            {this.state.filteredStars <= 2 ? '⭐️' : '💩'}
           </button>
-          <button name="3" onClick={this.handleFilter}>
-            ⭐️
+          <button name="3" className="star-buttons" onClick={this.handleFilter}>
+            {this.state.filteredStars <= 3 ? '⭐️' : '💩'}
           </button>
-          <button name="4" onClick={this.handleFilter}>
-            ⭐️
+          <button name="4" className="star-buttons" onClick={this.handleFilter}>
+            {this.state.filteredStars <= 4 ? '⭐️' : '💩'}
           </button>
-          <button name="5" onClick={this.handleFilter}>
+          <button name="5" className="star-buttons" onClick={this.handleFilter}>
             ⭐️
           </button>
         </h2>
