@@ -22,12 +22,12 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:userId/cart', (req, res, next) => {
-  let userId = req.params.userId
-  if (Number(userId) === req.user.id) {
+  let userId = req.user.id
+  if (userId) {
     User.getCart(userId)
       .then(returnedCartLineItems => {
         if (!returnedCartLineItems.length) {
-          res.send('There are no items in this cart')
+          res.send([])
         } else {
           res.json(returnedCartLineItems)
         }
@@ -62,9 +62,9 @@ router.put('/:userId/cart', (req, res, next) => {
   let productId = req.body.productId
   let quantity = req.body.quantity
   let orderId = req.body.orderId
-  let userId = req.params.userId
+  let userId = req.user.id
 
-  if (Number(userId) === req.user.id) {
+  if (userId) {
     Product.findById(productId)
       .then(foundProduct => {
         return foundProduct.price * quantity
@@ -88,12 +88,32 @@ router.put('/:userId/cart', (req, res, next) => {
   }
 })
 
+//Plae order route
 router.put('/:userId/placeOrder', (req, res, next) => {
-  let userId = req.params.userId;
-  if (Number(userId) === req.user.id) {
-    User.findOrderByUserId(userId)
+  let userId = req.user.id;
+  let total;
+
+  if (userId) {
+    return User.findOrderByUserId(userId)
+    .then(foundOrder => {
+      return OrderLineItem.findAll({
+        where: {
+          orderId: foundOrder.id
+        }
+      })
+    })
+    .then(returnedLineItems => {
+      let subtotals = [];
+      returnedLineItems.forEach(lineItem => subtotals.push(lineItem.dataValues.subtotal))
+
+      total = subtotals.reduce( (acc, cv) => acc + cv )
+    })
+    .then(() => {
+      return User.findOrderByUserId(userId)
+    })
     .then(foundOrder => {
       return foundOrder.update({
+        total,
         orderPlaced: true
       })
     })

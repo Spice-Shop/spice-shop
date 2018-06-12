@@ -41,12 +41,11 @@ class SingleProductDetail extends Component {
     return selectedProduct ? (
       <div>
         <div>
-          {' '}
           {authorized ? (
             <h3>Hey admin! Click on text to edit name and description.</h3>
           ) : (
             <div />
-          )}{' '}
+          )}
         </div>
         <div key={selectedProduct.id} className="product-container">
           <ContentEditable
