@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import SingleProduct from './single-product'
-import { fetchProducts } from '../../store/products'
 
 class Products extends Component {
   constructor(props) {
@@ -17,10 +16,7 @@ class Products extends Component {
     let value = parseInt(e.target.name, 10)
     this.setState({ filteredStars: value })
   }
-  // handleDelete(productName) {
-  //   this.setState({ deletedProduct: productName })
-  //   this.props.getProducts()
-  // }
+
   render() {
     const { updateCart } = this.props.state
     const products = this.props.state.products
@@ -75,7 +71,6 @@ const mapProducts = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProducts: () => dispatch(fetchProducts()),
     updateCart: product => {
       console.log(this.props.state.cart)
     }
