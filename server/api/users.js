@@ -69,25 +69,36 @@ router.put('/:userId/cart', (req, res, next) => {
   }
 })
 
+//Plae order route
 router.put('/:userId/placeOrder', (req, res, next) => {
-  let userId = req.user.Id;
+  let userId = req.user.id;
+  let total;
+
   if (userId) {
     User.findOrderByUserId(userId)
     .then(foundOrder => {
-      return foundOrder.update({
-        orderPlaced: true
-      })
-    })
-    .then(updatedOrder => {
       return OrderLineItem.findAll({
         where: {
-          orderId: updatedOrder.id
+          orderId: foundOrder.id
         }
       })
     })
     .then(returnedLineItems => {
-      let total = returnedLineItems.reduce( (acc, cv) => ({subtotal: acc.subtotal + cv.subtotal}) ).subtotal
-      return total
+      let subtotals = [];
+      returnedLineItems.forEach(lineItem => subtotals.push(lineItem.dataValues.subtotal))
+
+      total = subtotals.reduce( (acc, cv) => acc + cv )
+    })
+    .then(() => {
+      return User.findOrderByUserId(userId)
+    })
+    .then(foundOrder => {
+      console.log(foundOrder)
+      console.log('userId: ', userId, 'Total: ', total)
+      return foundOrder.update({
+        total,
+        orderPlaced: true
+      })
     })
     .then(res.status(204))
     .catch(next)

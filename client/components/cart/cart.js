@@ -29,8 +29,14 @@ class CartItems extends Component {
     const handleSubmit = this.props.handleSubmit
     const userId = this.props.state.user.id
 
-    //calculate total for cart
-    const total = cart.length && cart.reduce( (acc, cv) => ({subtotal: acc.subtotal + cv.subtotal}) ).subtotal
+    //calculate total for cart FIX NO CART ITEMS BUG, LOOKS TO REDUCE!!!!!!
+    let total;
+
+    if (cart.length === 0) {
+      total = 0;
+    } else {
+      total = cart.reduce( (acc, cv) => ({subtotal: acc.subtotal + cv.subtotal}) ).subtotal
+    }
 
     // const findProductsById = (products, id) => {
     //   products.filter
