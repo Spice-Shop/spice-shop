@@ -29,6 +29,9 @@ class CartItems extends Component {
     const handleSubmit = this.props.handleSubmit
     const userId = this.props.state.user.id
 
+    //calculate total for cart
+    const total = cart.length && cart.reduce( (acc, cv) => ({subtotal: acc.subtotal + cv.subtotal}) ).subtotal
+
     // const findProductsById = (products, id) => {
     //   products.filter
     // }
@@ -72,13 +75,14 @@ class CartItems extends Component {
                   <div className="my-product-quantity-container">
                     <input onChange={(event) => updateQuant(cartItem, userId, event)} className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
                     {/*<button onClick={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>*/}
-                    <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
+                    <div className="my-product-subtotal">Subtotal: {(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                   </div>
                 </div>
               )
             })}
             <div className="cart-total">{/* PUT SUBTOTAL ON STATE, THIS SHOULD BE RENDERED BY TOTAL ON STATE */}</div>
             <button onClick={() => handleSubmit(userId)} className="cart-submit" type="submit">Checkout</button>
+            <div className="my-product-total">Total: {total.toFixed(2)}</div>
           </div>
         </div>
       )
