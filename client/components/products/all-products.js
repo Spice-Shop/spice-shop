@@ -28,6 +28,7 @@ class Products extends Component {
     return (
       <div className="main-product-container">
         <h3>Products</h3>
+        <h5>Click on a star to filter products of that rating or higher.</h5>
         <h2>
           <button name="1" className="star-buttons" onClick={this.handleFilter}>
             {this.state.filteredStars <= 1 ? '⭐️' : '💩'}
