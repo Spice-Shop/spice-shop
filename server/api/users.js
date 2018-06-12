@@ -25,15 +25,16 @@ router.get('/:userId/cart', (req, res, next) => {
 })
 
 router.put('/:userId/cart', (req, res, next) => {
-  let productId = req.body.productId
-  let quantity = req.body.quantity
-  let orderId = req.body.orderId
+  console.log(req.body)
+  // let productId = req.body.productId
+  // let quantity = req.body.quantity
+  // let orderId = req.body.orderId
 
-  OrderLineItem.update({
-    quantity
-  }, {
-    where: {productId, orderId},
-    returning: true, // needed for affectedRows to be populated
-    plain: true // makes sure that the returned instances are just plain objects
-  })
+  // OrderLineItem.update({
+  //   quantity
+  // }, {
+  //   where: {productId, orderId},
+  //   returning: true, // needed for affectedRows to be populated
+  //   plain: true // makes sure that the returned instances are just plain objects
+  // })
 })

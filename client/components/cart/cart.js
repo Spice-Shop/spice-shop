@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import { updateQuantity, changeLineItemQuantity } from  '../../store/cart'
 
 /**
  * COMPONENT
@@ -12,7 +13,9 @@ const CartItems = (props) => {
   const cart = props.state.cart
   //set products var
   const products = props.state.products
-  const updateQuantity = props.state.updateQuantity
+  const updateQuant = props.updateQuant
+  const handleChange = props.handleChange
+  const userId = props.state.user.id
 
   // const findProductsById = (products, id) => {
   //   products.filter
@@ -54,8 +57,8 @@ const CartItems = (props) => {
                   <div className="product-price">{myProduct.price}</div>
                 </div>
                 <div className="my-product-quantity-container">
-                    <input className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
-                    <button onClick={() => updateQuantity(cartItem) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
+                    <input onChange={(event) => handleChange(cartItem, event)} className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    <button onClick={() => updateQuant(cartItem, userId) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>
                     <div className="my-product-subtotal">{(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                 </div>
               </div>
@@ -78,7 +81,11 @@ const mapCart = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    updateQuantity: () => dispatch(updateQuantity(cartItem))
+    handleChange: (cartItem, event) => {
+      let quantity = event.target.value
+      dispatch(changeLineItemQuantity(quantity, cartItem))
+    },
+    updateQuant: (cartItem, userId) => dispatch(updateQuantity(cartItem, userId))
   }
 }
 

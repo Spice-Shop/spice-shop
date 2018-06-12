@@ -5,7 +5,8 @@ import axios from 'axios'
  */
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
-const UPDATE_LINE_ITEM_QUANITY = 'UPDATE_LINE_ITEM_QUANITY'
+const CHANGE_LINE_ITEM_QUANTITY = 'CHANGE_LINE_ITEM_QUANTITY'
+const UPDATE_LINE_ITEM_QUANTITY = 'UPDATE_LINE_ITEM_QUANTITY'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
@@ -16,9 +17,10 @@ const initialCart = []
 /**
  * ACTION CREATORS
  */
-const getCart = cartItems => ({type: GET_CART, cartItems})
-const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
-const updateLineItemQuantity = quantity => ({type: UPDATE_LINE_ITEM_QUANITY, quantity})
+export const getCart = cartItems => ({type: GET_CART, cartItems})
+export const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
+export const changeLineItemQuantity = (quantity, cartItem) => ({type: CHANGE_LINE_ITEM_QUANTITY, quantity, cartItem})
+export const updateLineItemQuantity = quantity => ({type: UPDATE_LINE_ITEM_QUANTITY, quantity})
 // const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -36,17 +38,17 @@ export function fetchCart(userId) {
     };
   }
 
-export function updateQuantity(cartItem) {
+export function updateQuantity(cartItem, userId) {
   return function thunk(dispatch) {
     return axios
-        .put(`/api/users/${userId}/cart`)
-        .then(cartItems => {
-          const action = getCart(cartItems.data);
-          dispatch(action);
-        })
-        .catch(err => console.log(err))
+        .put(`/api/users/${userId}/cart`, cartItem)
+        // .then(cartItems => {
+        //   const action = getCart(cartItems.data);
+        //   dispatch(action);
+        // })
+        // .catch(err => console.log(err))
   }
-} 
+}
 
 /**
  * REDUCER
@@ -56,7 +58,11 @@ export default function (state = initialCart, action) {
     case GET_CART:
       return action.cartItems
     case ADD_TO_CART:
-      return action.cartItem
+      return [...state, action.cartItem]
+    case CHANGE_LINE_ITEM_QUANTITY:
+      return 
+    case UPDATE_LINE_ITEM_QUANTITY:
+      return action.quantity
     // case REMOVE_USER:
     //   return defaultUser
     default:
