@@ -27,7 +27,7 @@ router.get('/:userId/cart', (req, res, next) => {
     User.getCart(userId)
       .then(returnedCartLineItems => {
         if (!returnedCartLineItems.length) {
-          res.send('There are no items in this cart')
+          res.send([])
         } else {
           res.json(returnedCartLineItems)
         }
@@ -75,7 +75,7 @@ router.put('/:userId/placeOrder', (req, res, next) => {
   let total;
 
   if (userId) {
-    User.findOrderByUserId(userId)
+    return User.findOrderByUserId(userId)
     .then(foundOrder => {
       return OrderLineItem.findAll({
         where: {
@@ -93,8 +93,6 @@ router.put('/:userId/placeOrder', (req, res, next) => {
       return User.findOrderByUserId(userId)
     })
     .then(foundOrder => {
-      console.log(foundOrder)
-      console.log('userId: ', userId, 'Total: ', total)
       return foundOrder.update({
         total,
         orderPlaced: true
