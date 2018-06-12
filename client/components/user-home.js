@@ -1,26 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {AllProducts} from './products/all-products'
+import { connect } from 'react-redux'
+import { AllProducts } from './products/all-products'
 
 /**
  * COMPONENT
  */
 export const UserHome = (props) => {
   const {email, isAdmin, allUsers} = props
-  
   return isAdmin ? (
     <div className="main-product-container">
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-    <div>
+      <div>
+        <h3>Welcome, {email}</h3>
+      </div>
+      <div>
         <h3>MANAGE PRODUCTS</h3>
         <div>
-        <AllProducts />
+          <AllProducts />
         </div>
-    </div>
-    <div>
+      </div>
+      <div>
         <h3>MANAGE USERS</h3>
         <div className="parent-product-container">
           {allUsers.length ? (
@@ -37,17 +36,17 @@ export const UserHome = (props) => {
             <h2>There are currently no users to manage</h2>
           )}
         </div>
+      </div>
     </div>
-    </div>
+  ) : (
+    <h3>Welcome, {email}</h3>
   )
-  : (<h3>Welcome, {email}</h3>)
 }
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  console.log(state.allUsers)
+const mapState = state => {
   return {
     allUsers: state.allUsers,
     email: state.user.email,

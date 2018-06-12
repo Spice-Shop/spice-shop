@@ -22,8 +22,8 @@ async function seed() {
   // executed until that promise resolves!
   //FIRST USER NOW ADMIN
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123', isAdmin: true}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({ email: 'cody@email.com', password: '123', isAdmin: true }),
+    User.create({ email: 'murphy@email.com', password: '123' })
   ])
   const products = await Promise.all([
     Product.create({
@@ -37,7 +37,7 @@ async function seed() {
     }),
     Product.create({
       name: 'Turmeric',
-      description: 'heals everything that ails you',
+      description: 'heals what ails you',
       imgUrl:
         'https://www.hiltonherbs.com/image/cache/data/STRAIGHT%20HERBS/Curcuma-600x600.jpg',
       rating: 4,

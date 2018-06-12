@@ -39,7 +39,7 @@ router.get('/:productId', (req, res, next) => {
   let product = req.params.productId;
   Product.findById(product)
     .then(product => res.json(product))
-    .catch(next);
+    .catch(next)
 })
 
 //Update Single Product Route
@@ -61,7 +61,7 @@ router.delete('/:productId', (req, res, next) => {
   if (req.user.isAdmin){
   Product.findById(product)
     .then(foundProduct => foundProduct.destroy())
-    .then(res.status(204))
+    .then(res.sendStatus(204))
     .catch(next)
   }
 })
