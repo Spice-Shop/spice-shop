@@ -5,8 +5,8 @@ import { removeProduct } from '../../store/products'
 
 class SingleProduct extends Component {
   render() {
-    const { product, removeProduct, currentUser } = this.props
-    const authorized = currentUser && currentUser.isAdmin
+    const { product, removeProduct, user } = this.props
+    const authorized = user && user.isAdmin
     let productImage = {
       backgroundImage: `url('${product.imgUrl}')`
     }
@@ -31,13 +31,15 @@ class SingleProduct extends Component {
   }
 }
 
-const mapUser = ({ currentUser }) => ({ currentUser })
+const mapState = state => {
+  return { user: state.user }
+}
 
 const mapDispatch = { removeProduct }
 
 export default withRouter(
   connect(
-    mapUser,
+    mapState,
     mapDispatch
   )(SingleProduct)
 )

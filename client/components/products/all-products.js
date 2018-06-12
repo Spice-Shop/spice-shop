@@ -3,27 +3,26 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import SingleProduct from './single-product'
 
-//--------------Component-------------------
 class Products extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      filtered: 0
+      filteredStars: 0
     }
     this.handleFilter = this.handleFilter.bind(this)
   }
 
   handleFilter(e) {
     let value = parseInt(e.target.name, 10)
-    this.setState({ filtered: value })
+    this.setState({ filteredStars: value })
   }
 
   render() {
     const { updateCart } = this.props.state
     const products = this.props.state.products
-    const filteredProducts = this.state.filtered
+    const filteredStarsProducts = this.state.filteredStars
       ? products.filter(product => {
-          return product.rating === this.state.filtered
+          return product.rating === this.state.filteredStars
         })
       : products
     return (
@@ -47,8 +46,8 @@ class Products extends Component {
           </button>
         </h2>
         <div className="parent-product-container">
-          {filteredProducts.length ? (
-            filteredProducts.map(product => (
+          {filteredStarsProducts.length ? (
+            filteredStarsProducts.map(product => (
               <SingleProduct product={product} key={product.id} />
             ))
           ) : (
