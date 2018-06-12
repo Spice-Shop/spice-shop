@@ -4,6 +4,7 @@ import Routes from './routes'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchProducts } from './store/products'
+import { fetchAllUsers } from './store/all-users'
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData()
+    this.props.fetchInitialUsers()
   }
 
   render() {
@@ -34,7 +36,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchInitialData: () => dispatch(fetchProducts())
+    fetchInitialData: () => dispatch(fetchProducts()),
+    fetchInitialUsers: () => dispatch(fetchAllUsers())
   }
 }
 
