@@ -15,12 +15,12 @@ class History extends Component {
 
   render() {
     const orderHistory = this.props.orderHistory
-    // console.log(orderHistory)
+    console.log("HEYYYYY", typeof orderHistory)
     return (
       <div className="main-product-container">
         <h3>Order History</h3>
         <div className="parent-product-container">
-          {orderHistory.length ? (
+          {typeof orderHistory !== 'string' ? (
             orderHistory.map(order => (
             <div key={order.id} className="product-container">
                 <div>Order Number: {order.id}</div>
