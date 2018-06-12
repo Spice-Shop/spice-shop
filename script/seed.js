@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const { User, Product } = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -15,8 +15,8 @@ const {User, Product} = require('../server/db/models')
  * Now that you've got the main idea, check it out in practice below!
  */
 
-async function seed () {
-  await db.sync({force: true})
+async function seed() {
+  await db.sync({ force: true })
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
@@ -29,32 +29,37 @@ async function seed () {
     Product.create({
       name: 'Oregano',
       description: 'great for pizza',
-      imgUrl: 'https://cdn.shopify.com/s/files/1/0156/0137/products/refill_0020_oregano.jpg?v=1522849769',
+      imgUrl:
+        'https://cdn.shopify.com/s/files/1/0156/0137/products/refill_0020_oregano.jpg?v=1522849769',
       rating: 3,
-      price: 1.00,
+      price: 1.0,
       originCategory: 'Italy'
     }),
     Product.create({
       name: 'Turmeric',
-      description: 'great for pizza',
-      imgUrl: 'https://www.hiltonherbs.com/image/cache/data/STRAIGHT%20HERBS/Curcuma-600x600.jpg',
+      description: 'heals everything that ails you',
+      imgUrl:
+        'https://www.hiltonherbs.com/image/cache/data/STRAIGHT%20HERBS/Curcuma-600x600.jpg',
       rating: 4,
-      price: 4.00,
+      price: 4.0,
       originCategory: 'India'
     }),
     Product.create({
       name: 'Pepper',
-      description: 'great for pizza',
-      imgUrl: 'https://static.thespicehouse.com/images/image/40/large_pepper.JPG',
+      description: "can't live without it",
+      imgUrl:
+        'https://static.thespicehouse.com/images/image/40/large_pepper.JPG',
       rating: 5,
-      price: 2.00,
+      price: 2.0,
       originCategory: 'Vietnam'
     }),
     Product.create({
-      name: 'Curry', description: 'great for pizza',
-      imgUrl: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/spice_rack_herbs_slideshow/getty_rf_photo_of_variety_of_spices_in_bowls.jpg',
+      name: 'Curry',
+      description: 'will curry your favor',
+      imgUrl:
+        'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/spice_rack_herbs_slideshow/getty_rf_photo_of_variety_of_spices_in_bowls.jpg',
       rating: 5,
-      price: 3.00,
+      price: 3.0,
       originCategory: 'Vietnam'
     })
   ])
@@ -70,15 +75,16 @@ async function seed () {
 // any errors that might occur inside of `seed`.
 if (module === require.main) {
   seed()
-  .catch(err => {
-    console.error(err)
-    process.exitCode = 1
-  })
-  .finally(() => { // `finally` is like then + catch. It runs no matter what.
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+    .catch(err => {
+      console.error(err)
+      process.exitCode = 1
+    })
+    .finally(() => {
+      // `finally` is like then + catch. It runs no matter what.
+      console.log('closing db connection')
+      db.close()
+      console.log('db connection closed')
+    })
   /*
    * note: everything outside of the async function is totally synchronous
    * The console.log below will occur before any of the logs that occur inside
