@@ -8,7 +8,7 @@ const Product = require('../db/models/product')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user.isAdmin) {
     User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
@@ -23,9 +23,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:userId/cart', (req, res, next) => {
-  let loggedIn = req.user
   let userId = req.user.id
-  if (loggedIn) {
+  if (userId) {
     User.getCart(userId)
       .then(returnedCartLineItems => {
         if (!returnedCartLineItems.length) {

@@ -23,9 +23,6 @@ class SingleProduct extends Component {
         <div className="product-description">{product.description}</div>
         <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
         {user && user.id && <div className="product-button-container"><button onClick={() => addLineItem(user.id, product.id)}>Add To Cart</button></div>}
-        {/* {authorized && (
-          <button onClick={() => removeProduct(product.id)}>Delete</button>
-        )} */}
       </div>
     )
   }

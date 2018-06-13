@@ -53,7 +53,6 @@ export function updateQuantity(cartItem, userId, event) {
 
 export function addLineItem(userId, productId, history) {
   return function thunk(dispatch) {
-    console.log(productId)
     return axios
       .post(`/api/users/cart`, {productId: +productId})
       .then(()=> {
