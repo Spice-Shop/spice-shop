@@ -88,7 +88,7 @@ class CartItems extends Component {
                     <div className="product-price">{myProduct.price}</div>
                   </div>
                   <div className="my-product-quantity-container">
-                    <input onChange={(event) => updateQuant(cartItem, userId, event)} className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    <input onChange={(event) => updateQuant(cartItem, userId, event)} className="my-product-quantity-input" name="cart-item-quantity" value={cartItem.quantity} />
                     {/*<button onClick={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>*/}
                     <div className="my-product-subtotal">Subtotal: {(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                   </div>

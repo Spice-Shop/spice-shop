@@ -22,7 +22,7 @@ class SingleProduct extends Component {
             {`${'⭐'.repeat(product.rating)}`}
           </div>
           <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
-          {user && user.id && <button onClick={() => addLineItem(product.id)}>Add To Cart</button>}
+          {user && user.id && <button onClick={() => addLineItem(user.id, product.id)}>Add To Cart</button>}
         {/* {authorized && (
           <button onClick={() => removeProduct(product.id)}>Delete</button>
         )} */}
@@ -38,7 +38,7 @@ const mapState = state => {
 const mapDispatch = (dispatch, ownProps) => { 
     return {
       removeProduct,
-      addLineItem: (productId) => dispatch(addLineItem(productId, ownProps.history)) 
+      addLineItem: (userId, productId) => dispatch(addLineItem(userId, productId, ownProps.history)) 
   }
 }
 
