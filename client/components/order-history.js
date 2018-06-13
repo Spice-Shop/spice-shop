@@ -39,7 +39,7 @@ class History extends Component {
 
 //THESE ARE OUR MAP PROPS
 const mapState = state => {
-    console.log(state)
+
   return {
     userId: state.user.id,
     orderHistory: state.orderHistory

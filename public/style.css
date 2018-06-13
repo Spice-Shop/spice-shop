@@ -35,6 +35,37 @@ form div {
   display: inline-block;
 }
 
+button {
+  padding: 8px 15px;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  font-family: Lato;
+  letter-spacing: 1px;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #3ab87c;
+  color: #fff;
+}
+
+.auth-form {
+  background: #fbfbfb;
+  padding: 0px 10px;
+}
+
+.button-google {
+  margin-left: 20px;
+}
+
+img.google-icon {
+  height: 10px;
+  margin-left: 5px;
+  position: relative;
+  top: 1px;
+}
+
 /*-------- App Sections ---------- */
 .app-container {
   display: flex;
@@ -198,6 +229,10 @@ form div {
 }
 
 /*-------- Products Grid ---------- */
+.main-product-container {
+  padding-top: 40px;
+}
+
 .product-container {
   width: 200px;
   border-bottom: 2px solid #000;
@@ -218,6 +253,37 @@ form div {
   height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 10px 0px;
+}
+
+.product-button-container {
+  text-align: center;
+}
+
+.product-description {
+  font-size: 13px;
+}
+
+.product-price {
+  margin-bottom: 9px;
+}
+
+.cart-submit-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.my-product-total {
+  margin-right: 20px;
+}
+
+.my-product-subtotal {
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /*-------- Cart ---------- */

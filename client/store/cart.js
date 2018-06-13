@@ -4,7 +4,6 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_CART = 'GET_CART'
-const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_LINE_ITEM_QUANTITY = 'UPDATE_LINE_ITEM_QUANTITY'
 const CLEAR_CART = 'CLEAR_CART'
 // const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -18,7 +17,6 @@ const initialCart = []
  * ACTION CREATORS
  */
 export const getCart = cartItems => ({type: GET_CART, cartItems})
-export const addToCart = cartItem => ({type: ADD_TO_CART, cartItem})
 export const updateLineItemQuantity = quantity => ({type: UPDATE_LINE_ITEM_QUANTITY, quantity})
 export const clearCart = () => ({type: CLEAR_CART})
 // const removeUser = () => ({type: REMOVE_USER})
@@ -53,20 +51,23 @@ export function updateQuantity(cartItem, userId, event) {
   }
 }
 
-export function addLineItem(productId) {
+export function addLineItem(userId, productId, history) {
   return function thunk(dispatch) {
     console.log(productId)
     return axios
       .post(`/api/users/cart`, {productId: +productId})
-      .then(newCartItem => {
-        const action = addToCart(newCartItem.data);
+      .then(()=> {
+        const action = fetchCart(userId);
         dispatch(action);
+      })
+      .then(() => {
+        history.push('/cart')
       })
       .catch(err => console.log(err))
   };
 }
 
-export function placeOrder(userId) {
+export function placeOrder(userId, history) {
 
   return function thunk(dispatch) {
     return axios
@@ -75,6 +76,7 @@ export function placeOrder(userId) {
         .then(() => {
           const action = fetchCart(userId);
           dispatch(action);
+          history.push('/order-history')
         })
         .catch(err => console.log(err))
   }
@@ -87,8 +89,6 @@ export default function (state = initialCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cartItems
-    case ADD_TO_CART:
-      return [...state, action.cartItem]
     case CLEAR_CART:
       return []
     // case REMOVE_USER:

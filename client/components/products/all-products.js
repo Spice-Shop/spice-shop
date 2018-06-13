@@ -27,25 +27,25 @@ class Products extends Component {
       : products
     return (
       <div className="main-product-container">
-        <h3>Products</h3>
-        <h5>Click on a star to filter products of that rating or higher.</h5>
-        <h2>
+        {!this.props.home && <h3>Products</h3>}
+        {!this.props.home && <h5>Click on a star to filter products of that rating or higher.</h5>}
+        {!this.props.home && <h2>
           <button name="1" className="star-buttons" onClick={this.handleFilter}>
-            {this.state.filteredStars <= 1 ? '⭐️' : '💩'}
+            {this.state.filteredStars > 1 ? '★' : '⭐'}
           </button>
           <button name="2" className="star-buttons" onClick={this.handleFilter}>
-            {this.state.filteredStars <= 2 ? '⭐️' : '💩'}
+            {this.state.filteredStars > 2 ? '★' : '⭐️'}
           </button>
           <button name="3" className="star-buttons" onClick={this.handleFilter}>
-            {this.state.filteredStars <= 3 ? '⭐️' : '💩'}
+            {this.state.filteredStars > 3 ? '★' : '⭐️'}
           </button>
           <button name="4" className="star-buttons" onClick={this.handleFilter}>
-            {this.state.filteredStars <= 4 ? '⭐️' : '💩'}
+            {this.state.filteredStars > 4 ? '★' : '⭐️'}
           </button>
           <button name="5" className="star-buttons" onClick={this.handleFilter}>
-            ⭐️
+            {this.state.filteredStars > 5 ? '★' : '⭐️'}
           </button>
-        </h2>
+        </h2>}
         <div className="parent-product-container">
           {filteredStarsProducts.length ? (
             filteredStarsProducts.map(product => (
@@ -70,7 +70,7 @@ const mapProducts = state => {
 const mapDispatch = dispatch => {
   return {
     updateCart: product => {
-      console.log(this.props.state.cart)
+
     }
   }
 }
