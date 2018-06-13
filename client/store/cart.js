@@ -51,24 +51,16 @@ export function updateQuantity(cartItem, userId, event) {
   }
 }
 
-<<<<<<< HEAD
-export function addLineItem(productId) {
-=======
 export function addLineItem(userId, productId, history) {
->>>>>>> 13b1811384ce2bf4595035f5f93c6e4c72987278
   return function thunk(dispatch) {
-    console.log(productId)
     return axios
       .post(`/api/users/cart`, {productId: +productId})
       .then(()=> {
         const action = fetchCart(userId);
         dispatch(action);
-<<<<<<< HEAD
-=======
       })
       .then(() => {
         history.push('/cart')
->>>>>>> 13b1811384ce2bf4595035f5f93c6e4c72987278
       })
       .catch(err => console.log(err))
   };
