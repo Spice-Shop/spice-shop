@@ -241,6 +241,25 @@ img.google-icon {
   background: #efefef;
 }
 
+.line-item-container {
+  border-bottom: 2px solid #000;
+  padding: 20px;
+  margin: 10px;
+  background: #ffffff;
+}
+
+.order-history-total {
+  margin: 20px 20px 10px 20px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.order-number {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 20px;
+}
+
 .parent-product-container {
   display: flex;
   flex-wrap: wrap;
