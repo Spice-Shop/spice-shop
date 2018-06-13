@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 const pkg = require('../../package.json')
+import { AllProducts } from '../components'
 
 class HomeItems extends Component {
   render() {
@@ -15,6 +16,8 @@ class HomeItems extends Component {
             </div>
           </div>
         </div>
+
+        <AllProducts home={true} />
       </div>
     )
   }
