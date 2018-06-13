@@ -35,7 +35,7 @@ class CartItems extends Component {
     if (cart.length === 0) {
       total = 0;
     } else {
-      total = cart.reduce( (acc, cv) => ({subtotal: acc.subtotal + cv.subtotal}) ).subtotal
+      total = cart.reduce((acc, cv) => ({ subtotal: acc.subtotal + cv.subtotal })).subtotal
     }
 
     // const findProductsById = (products, id) => {
@@ -73,22 +73,26 @@ class CartItems extends Component {
                     <div className="my-product-imgUrl" style={myProductImage} />
                   </div>
                   <div className="my-product-text-container">
-                    <div className="my-product-name">{myProduct.name}</div>
-                    <div className="my-product-description">{myProduct.description}</div>
-                    <div className="my-product-rating">{myProduct.rating}</div>
-                    <div className="product-price">{myProduct.price}</div>
+                    <div className="product-name">{myProduct.name}</div>
+                    <div className="product-description">{myProduct.description}</div>
+                    <div className="product-rating">
+                      {`${'⭐'.repeat(myProduct.rating)}`}
+                    </div>
+                    <div className="product-price">${myProduct.price.toFixed(2)}</div>
                   </div>
                   <div className="my-product-quantity-container">
-                    <input onChange={(event) => updateQuant(cartItem, userId, event)} className="my-product-quantity-input" name="cart-item-quantity" defaultValue={cartItem.quantity} />
+                    <input onChange={(event) => updateQuant(cartItem, userId, event)} className="my-product-quantity-input" name="cart-item-quantity" value={cartItem.quantity} />
                     {/*<button onClick={(event) => updateQuant(cartItem, userId, event) } className="my-product-quantity-button" type="submit" name="update-quantity">Update</button>*/}
-                    <div className="my-product-subtotal">Subtotal: {(myProduct.price * cartItem.quantity).toFixed(2)}</div>
+                    <div className="my-product-subtotal">Subtotal: ${(myProduct.price * cartItem.quantity).toFixed(2)}</div>
                   </div>
                 </div>
               )
             })}
             <div className="cart-total">{/* PUT SUBTOTAL ON STATE, THIS SHOULD BE RENDERED BY TOTAL ON STATE */}</div>
-            <button onClick={() => handleSubmit(userId)} className="cart-submit" type="submit">Checkout</button>
-            <div className="my-product-total">Total: {total.toFixed(2)}</div>
+            <div className="cart-submit-container">
+              <div className="my-product-total">Total: ${total.toFixed(2)}</div>
+              <button onClick={() => handleSubmit(userId)} className="cart-submit" type="submit">Checkout</button>
+            </div>
           </div>
         </div>
       )
@@ -107,11 +111,11 @@ const mapCart = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     updateQuant: (cartItem, userId, event) => dispatch(updateQuantity(cartItem, userId, event)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
-    handleSubmit: (userId) => dispatch(placeOrder(userId))
+    handleSubmit: (userId) => dispatch(placeOrder(userId, ownProps.history))
   }
 }
 
