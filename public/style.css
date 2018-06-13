@@ -50,6 +50,21 @@ button:hover {
   color: #fff;
 }
 
+.auth-form {
+  background: #fbfbfb;
+  padding: 0px 10px;
+}
+
+.button-google {
+  margin-left: 20px;
+}
+
+img.google-icon {
+  height: 10px;
+  margin-left: 5px;
+  position: relative;
+  top: 1px;
+}
 
 /*-------- App Sections ---------- */
 .app-container {
