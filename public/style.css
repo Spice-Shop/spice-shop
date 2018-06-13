@@ -1,7 +1,6 @@
 /* ------ Font Import ------ */
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
-
 /* ------ Default Styles ------ */
 html {
   overflow-y: scroll;
@@ -43,13 +42,20 @@ form div {
   min-height: 100vh;
 }
 
+.star-buttons {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
 .main-container {
   flex: auto;
   width: 1200px;
   margin: 0 auto;
   padding-bottom: 40px;
 }
-
 
 /*-------- Header ---------- */
 .header-bar-container {
@@ -82,7 +88,6 @@ form div {
 .header-bar {
   display: flex;
 }
-
 
 /*-------- Navbar ---------- */
 .nav-bar-title-container {
@@ -123,7 +128,7 @@ form div {
 }
 
 .nav-item {
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
   color: #000;
 }
 
@@ -138,7 +143,7 @@ form div {
 
 .nav-item.active {
   border-bottom: 2px solid #3ab87c;
-    margin-bottom: -1px;
+  margin-bottom: -1px;
 }
 
 /*-------- Home Landing ---------- */
@@ -264,7 +269,6 @@ input.my-product-quantity-input {
   text-align: center;
   height: 56px;
 }
-
 
 /*-------- Footer ---------- */
 .footer-bar-container {
