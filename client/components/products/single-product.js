@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeProduct } from '../../store/products'
+import { addLineItem } from '../../store/cart'
 
 class SingleProduct extends Component {
   render() {
-    const { product, removeProduct, user } = this.props
+    const { product, removeProduct, user, addLineItem } = this.props
     const authorized = !!(user.id && user.isAdmin)
     let productImage = {
       backgroundImage: `url('${product.imgUrl}')`
@@ -20,6 +21,7 @@ class SingleProduct extends Component {
             {`${'⭐'.repeat(product.rating)}`}
           </div>
           <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
+          <button onClick={() => addLineItem(product.id)}>Add To Cart</button>
         </Link>
         {authorized && (
           <button onClick={() => removeProduct(product.id)}>Delete</button>
@@ -33,7 +35,12 @@ const mapState = state => {
   return { user: state.user }
 }
 
-const mapDispatch = { removeProduct }
+const mapDispatch = dispatch => { 
+    return {
+      removeProduct,
+      addLineItem: (productId) => dispatch(addLineItem(productId)) 
+  }
+}
 
 export default withRouter(
   connect(

@@ -53,6 +53,19 @@ export function updateQuantity(cartItem, userId, event) {
   }
 }
 
+export function addLineItem(productId) {
+  return function thunk(dispatch) {
+    console.log(productId)
+    return axios
+      .post(`/api/users/cart`, {productId: +productId})
+      .then(newCartItem => {
+        const action = addToCart(newCartItem.data);
+        dispatch(action);
+      })
+      .catch(err => console.log(err))
+  };
+}
+
 export function placeOrder(userId) {
 
   return function thunk(dispatch) {

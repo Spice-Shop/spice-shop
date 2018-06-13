@@ -3,6 +3,7 @@ const {
   User
 } = require('../db/models')
 const OrderLineItem = require('../db/models/order-line-item')
+const Order = require('../db/models/order')
 const Product = require('../db/models/product')
 module.exports = router
 
@@ -35,6 +36,42 @@ router.get('/:userId/cart', (req, res, next) => {
       .catch(next)
   } else {
     res.status(403).send('Sorry you do not have permission to view this page')
+  }
+})
+
+// Create Line Item 
+router.post('/cart', (req, res, next) => {
+  let productId = req.body.productId
+  let quantity = 1
+  let userId = req.user.id
+  
+  if (userId) {
+    Order.findOrCreate({
+      where: {
+        orderPlaced: false,
+        userId
+      }
+    })
+    .then(result => {
+      let orderId = result[0].id
+      return Product.findById(productId)
+        .then(foundProduct => {
+          return foundProduct.price
+        })
+        .then(subtotal => {
+          return OrderLineItem.create({
+            quantity,
+            subtotal,
+            orderId,
+            productId
+          }
+        )
+    })
+    .then(createdLineItem => res.json(createdLineItem))
+    .catch(next)
+  })} 
+  else {
+    res.status(403).send('Sorry you do not have permission to update this')  
   }
 })
 
