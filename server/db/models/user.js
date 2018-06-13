@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const Order = require('./order')
 const OrderLineItem = require('./order-line-item')
+const Product = require('./product')
 
 const User = db.define('user', {
   email: {
@@ -90,6 +91,7 @@ User.findOrderByUserId = function(userId) {
 
 User.findOrderHistoryByUserId = function(userId) {
   return Order.findAll({
+    include: [{model: Product}],
     where: {
       orderPlaced: true,
       userId

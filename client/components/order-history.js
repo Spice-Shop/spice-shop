@@ -15,6 +15,7 @@ class History extends Component {
 
   render() {
     const orderHistory = this.props.orderHistory
+    console.log("HELLO", orderHistory)
     return (
       <div className="main-product-container">
         <h3>Order History</h3>
@@ -23,6 +24,16 @@ class History extends Component {
             orderHistory.map(order => (
             <div key={order.id} className="product-container">
                 <div>Order Number: {order.id}</div>
+                {order.products.map(orderLineItems => (
+            <div key={orderLineItems.id} className="product-container">
+                <div>{orderLineItems.name}</div>
+                <div>Quantity: {orderLineItems.orderLineItem.quantity}</div>
+            <div className="product-price">
+                {`$ ${orderLineItems.price.toFixed(2)}`}
+              </div>
+            </div>
+            ))
+          }
             <div className="product-price">
                 Order Total: {`$ ${order.total.toFixed(2)}`}
               </div>
