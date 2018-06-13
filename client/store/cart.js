@@ -53,7 +53,7 @@ export function updateQuantity(cartItem, userId, event) {
   }
 }
 
-export function addLineItem(productId) {
+export function addLineItem(productId, history) {
   return function thunk(dispatch) {
     console.log(productId)
     return axios
@@ -61,6 +61,7 @@ export function addLineItem(productId) {
       .then(newCartItem => {
         const action = addToCart(newCartItem.data);
         dispatch(action);
+        history.push('/cart')
       })
       .catch(err => console.log(err))
   };

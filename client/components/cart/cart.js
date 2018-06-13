@@ -42,12 +42,21 @@ class CartItems extends Component {
     //   products.filter
     // }
 
-    if (cart.length === 0) {
+    if (userId && cart.length === 0) {
       return (
         <div>
           <h3>Cart</h3>
           <div>
             <h3>There are no products in your cart!</h3>
+          </div>
+        </div>
+      )
+    } else if (!userId && cart.length === 0) {
+      return (
+        <div>
+          <h3>Cart</h3>
+          <div>
+            <h3>Login to start your order!</h3>
           </div>
         </div>
       )

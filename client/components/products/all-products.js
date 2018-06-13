@@ -70,7 +70,7 @@ const mapProducts = state => {
 const mapDispatch = dispatch => {
   return {
     updateCart: product => {
-      console.log(this.props.state.cart)
+
     }
   }
 }
