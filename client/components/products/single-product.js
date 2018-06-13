@@ -16,16 +16,16 @@ class SingleProduct extends Component {
         <Link to={`/products/${product.id}`}>
           <div className="product-name">{product.name}</div>
           <div className="product-imgUrl" style={productImage} />
-        </Link>
           <div className="product-description">{product.description}</div>
           <div className="product-rating">
             {`${'⭐'.repeat(product.rating)}`}
           </div>
           <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
-          {user && user.id && <button onClick={() => addLineItem(product.id)}>Add To Cart</button>}
-        {/* {authorized && (
+          <button onClick={() => addLineItem(product.id)}>Add To Cart</button>
+        </Link>
+        {authorized && (
           <button onClick={() => removeProduct(product.id)}>Delete</button>
-        )} */}
+        )}
       </div>
     )
   }
@@ -35,10 +35,10 @@ const mapState = state => {
   return { user: state.user }
 }
 
-const mapDispatch = (dispatch, ownProps) => { 
+const mapDispatch = dispatch => { 
     return {
       removeProduct,
-      addLineItem: (productId) => dispatch(addLineItem(productId, ownProps.history)) 
+      addLineItem: (productId) => dispatch(addLineItem(productId)) 
   }
 }
 
