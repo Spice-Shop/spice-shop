@@ -18,9 +18,9 @@ class History extends Component {
           {typeof orderHistory !== 'string' ? (
             orderHistory.map(order => (
             <div key={order.id} className="product-container">
-                <div>Order Number: {order.id}</div>
+                <div className="order-number">Order Number: {order.id}</div>
                 {order.products.map(orderLineItems => (
-            <div key={orderLineItems.id} className="product-container">
+            <div key={orderLineItems.id} className="line-item-container">
                 <div>{orderLineItems.name}</div>
                 <div>Quantity: {orderLineItems.orderLineItem.quantity}</div>
             <div className="product-price">
@@ -29,7 +29,7 @@ class History extends Component {
             </div>
             ))
           }
-            <div className="product-price">
+            <div className="order-history-total">
                 Order Total: {`$ ${order.total.toFixed(2)}`}
               </div>
             </div>
