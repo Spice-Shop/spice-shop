@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import CartItems from './cart/cart'
 import { fetchOrderHistory } from  '../store/order-history'
 
 class History extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.props.fetchOrderHistory(this.props.userId)
@@ -15,7 +11,6 @@ class History extends Component {
 
   render() {
     const orderHistory = this.props.orderHistory
-    console.log("HELLO", orderHistory)
     return (
       <div className="main-product-container">
         <h3>Order History</h3>
@@ -50,7 +45,6 @@ class History extends Component {
 
 //THESE ARE OUR MAP PROPS
 const mapState = state => {
-    console.log(state)
   return {
     userId: state.user.id,
     orderHistory: state.orderHistory
