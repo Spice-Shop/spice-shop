@@ -17,12 +17,12 @@ class SingleProduct extends Component {
           <div className="product-name">{product.name}</div>
           <div className="product-imgUrl" style={productImage} />
         </Link>
-          <div className="product-description">{product.description}</div>
-          <div className="product-rating">
-            {`${'⭐'.repeat(product.rating)}`}
-          </div>
-          <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
-          {user && user.id && <button onClick={() => addLineItem(user.id, product.id)}>Add To Cart</button>}
+        <div className="product-rating">
+          {`${'⭐'.repeat(product.rating)}`}
+        </div>
+        <div className="product-description">{product.description}</div>
+        <div className="product-price">{`$ ${product.price.toFixed(2)}`}</div>
+        {user && user.id && <div className="product-button-container"><button onClick={() => addLineItem(user.id, product.id)}>Add To Cart</button></div>}
         {/* {authorized && (
           <button onClick={() => removeProduct(product.id)}>Delete</button>
         )} */}
@@ -35,10 +35,10 @@ const mapState = state => {
   return { user: state.user }
 }
 
-const mapDispatch = (dispatch, ownProps) => { 
-    return {
-      removeProduct,
-      addLineItem: (userId, productId) => dispatch(addLineItem(userId, productId, ownProps.history)) 
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+    removeProduct,
+    addLineItem: (userId, productId) => dispatch(addLineItem(userId, productId, ownProps.history))
   }
 }
 

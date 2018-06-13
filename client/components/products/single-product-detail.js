@@ -38,6 +38,9 @@ class SingleProductDetail extends Component {
     const productId = Number(this.props.match.params.id)
     const products = this.props.products
     const selectedProduct = products.filter(item => item.id === productId)[0]
+    let productImage = {
+      backgroundImage: `url('${selectedProduct && selectedProduct.imgUrl}')`
+    }
     return selectedProduct ? (
       <div>
         <div>
@@ -56,7 +59,7 @@ class SingleProductDetail extends Component {
             onChange={evt => this.onProductUpdate({ name: evt.target.value })}
             contentEditable={!!authorized}
           />
-          <img className="product-imgUrl" src={selectedProduct.imgUrl} />
+          <div className="product-imgUrl" style={productImage} />
           <ContentEditable
             disabled={!authorized}
             value={selectedProduct.description}
