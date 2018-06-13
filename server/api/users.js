@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
       .then(users => res.json(users))
       .catch(next)
   } else {
-    res.status(403).send('Sorry you do not have permission to view this page')
+    // res.status(403).send('Sorry you do not have permission to view this page')
   }
 })
 

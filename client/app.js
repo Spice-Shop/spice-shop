@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData()
-    this.props.isAdmin && this.props.fetchInitialUsers()
+    this.props.fetchInitialUsers()
   }
 
   render() {
