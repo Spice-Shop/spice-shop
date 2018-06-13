@@ -260,6 +260,10 @@ img.google-icon {
   text-align: center;
 }
 
+.product-name {
+  color: #000;
+}
+
 .product-description {
   font-size: 13px;
 }

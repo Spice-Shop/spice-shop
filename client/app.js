@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData()
-    this.props.fetchInitialUsers()
+    this.props.isAdmin && this.props.fetchInitialUsers()
   }
 
   render() {
@@ -34,7 +34,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     userId: state.user.id,
-    cart: state.cart
+    cart: state.cart,
+    isAdmin: state.user.isAdmin
   }
 }
 
