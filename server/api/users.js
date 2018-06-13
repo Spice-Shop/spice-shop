@@ -10,11 +10,11 @@ module.exports = router
 router.get('/', (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     User.findAll({
-        // explicitly select only the id and email fields - even though
-        // users' passwords are encrypted, it won't help if we just
-        // send everything to anyone who asks!
-        attributes: ['id', 'email', 'isAdmin']
-      })
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: ['id', 'email', 'isAdmin']
+    })
       .then(users => res.json(users))
       .catch(next)
   } else {
@@ -45,7 +45,7 @@ router.post('/cart', (req, res, next) => {
   let productId = req.body.productId
   let quantity = 1
   let userId = req.user.id
-  
+
   if (userId) {
     Order.findOrCreate({
       where: {
@@ -53,26 +53,35 @@ router.post('/cart', (req, res, next) => {
         userId
       }
     })
-    .then(result => {
-      let orderId = result[0].id
-      return Product.findById(productId)
-        .then(foundProduct => {
-          return foundProduct.price
-        })
-        .then(subtotal => {
-          return OrderLineItem.create({
-            quantity,
-            subtotal,
-            orderId,
-            productId
-          }
-        )
-    })
-    .then(createdLineItem => res.json(createdLineItem))
-    .catch(next)
-  })} 
+      .then(result => {
+        let orderId = result[0].id
+        return Product.findById(productId)
+          .then(foundProduct => {
+            return foundProduct.price
+          })
+          .then(productPrice => {
+            let price = productPrice
+            return OrderLineItem.findOrCreate({
+              where: {
+                orderId,
+                productId
+              }
+            }
+            )
+              .then(item => {
+                let quantity = item[0].dataValues.quantity + 1
+                return item[0].update({
+                  quantity,
+                  subtotal: quantity * price
+                })
+              })
+              .then(createdLineItem => res.json(createdLineItem))
+          })
+          .catch(next)
+      })
+  }
   else {
-    res.status(403).send('Sorry you do not have permission to update this')  
+    res.status(403).send('Sorry you do not have permission to update this')
   }
 })
 
@@ -112,51 +121,51 @@ router.put('/:userId/cart', (req, res, next) => {
           quantity,
           subtotal
         }, {
-          where: {
-            productId,
-            orderId
-          },
-          returning: true
-        })
+            where: {
+              productId,
+              orderId
+            },
+            returning: true
+          })
       })
       .then(updatedLineItem => res.json(updatedLineItem))
       .catch(next)
   } else {
-    res.status(403).send('Sorry you do not have permission to update this')  
+    res.status(403).send('Sorry you do not have permission to update this')
   }
 })
 
-//Plae order route
+//Place order route
 router.put('/:userId/placeOrder', (req, res, next) => {
   let userId = req.user.id;
   let total;
 
   if (userId) {
     return User.findOrderByUserId(userId)
-    .then(foundOrder => {
-      return OrderLineItem.findAll({
-        where: {
-          orderId: foundOrder.id
-        }
+      .then(foundOrder => {
+        return OrderLineItem.findAll({
+          where: {
+            orderId: foundOrder.id
+          }
+        })
       })
-    })
-    .then(returnedLineItems => {
-      let subtotals = [];
-      returnedLineItems.forEach(lineItem => subtotals.push(lineItem.dataValues.subtotal))
+      .then(returnedLineItems => {
+        let subtotals = [];
+        returnedLineItems.forEach(lineItem => subtotals.push(lineItem.dataValues.subtotal))
 
-      total = subtotals.reduce( (acc, cv) => acc + cv )
-    })
-    .then(() => {
-      return User.findOrderByUserId(userId)
-    })
-    .then(foundOrder => {
-      return foundOrder.update({
-        total,
-        orderPlaced: true
+        total = subtotals.reduce((acc, cv) => acc + cv)
       })
-    })
-    .then(res.sendStatus(204))
-    .catch(next)
+      .then(() => {
+        return User.findOrderByUserId(userId)
+      })
+      .then(foundOrder => {
+        return foundOrder.update({
+          total,
+          orderPlaced: true
+        })
+      })
+      .then(res.sendStatus(204))
+      .catch(next)
   } else {
     res.status(403).send('Sorry you do not have permission to place this order')
   }
