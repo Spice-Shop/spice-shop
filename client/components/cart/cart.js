@@ -116,11 +116,11 @@ const mapCart = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     updateQuant: (cartItem, userId, event) => dispatch(updateQuantity(cartItem, userId, event)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
-    handleSubmit: (userId) => dispatch(placeOrder(userId))
+    handleSubmit: (userId) => dispatch(placeOrder(userId, ownProps.history))
   }
 }
 

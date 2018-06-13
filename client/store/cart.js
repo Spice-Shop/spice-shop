@@ -67,7 +67,7 @@ export function addLineItem(productId, history) {
   };
 }
 
-export function placeOrder(userId) {
+export function placeOrder(userId, history) {
 
   return function thunk(dispatch) {
     return axios
@@ -76,6 +76,7 @@ export function placeOrder(userId) {
         .then(() => {
           const action = fetchCart(userId);
           dispatch(action);
+          history.push('/order-history')
         })
         .catch(err => console.log(err))
   }
