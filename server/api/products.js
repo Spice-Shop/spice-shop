@@ -1,21 +1,6 @@
 const router = require('express').Router()
 const { Product } = require('../db/models')
 
-//route to find single product by ID
-// router.param('productId', (req, res, next, id) => {
-//   Product.findById(id)
-//     .then(product => {
-//       if (!product) {
-//         const err = Error('Product not found')
-//         err.status = 404
-//         throw err
-//       }
-//       req.product = product
-//       next()
-//     })
-//     .catch(next)
-// })
-
 //All Products Route
 router.get('/', (req, res, next) => {
   Product.findAll({})

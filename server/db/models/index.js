@@ -19,7 +19,6 @@ const OrderLineItem = require('./order-line-item')
 
 
 Order.belongsTo(User)
-
 Order.belongsToMany(Product, {through: OrderLineItem});
 Product.belongsToMany(Order, {through: OrderLineItem});
 

@@ -101,8 +101,6 @@ router.get('/:userId/order-history', (req, res, next) => {
   }
 })
 
-
-
 // Update Line Item quantity & subtotal
 router.put('/:userId/cart', (req, res, next) => {
   let productId = req.body.productId
